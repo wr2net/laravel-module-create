@@ -1,0 +1,19 @@
+{
+    "name": "wagner/laravel_module_create",
+    "description": "Create complete module on Laravel for new resource.",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Wagner\\LaravelModuleCreate\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "wr2net",
+            "email": "wagnerr2@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {}
+}
