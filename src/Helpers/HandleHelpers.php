@@ -19,9 +19,9 @@ class HandleHelpers
     const NC = "\033[0m";
 
     /**
-     * @var CreateTraitSoftDelete
+     * @var CreateTraits
      */
-    private CreateTraitSoftDelete $forCreateTraitSoftDelete;
+    private CreateTraits $forCreateTraitSoftDelete;
 
     /**
      * @var CreateController
@@ -33,11 +33,41 @@ class HandleHelpers
      */
     private CreateModel $forCreateModel;
 
+    /**
+     * @var CreateProvider
+     */
+    private CreateProvider $forCreateProvider;
+
+    /**
+     * @var CreateRequest
+     */
+    private CreateRequest $forCreateRequest;
+
+    /**
+     * @var CreateResource
+     */
+    private CreateResource $forCreateResource;
+
+    /**
+     * @var CreateRoute
+     */
+    private CreateRoute $forCreateRoute;
+
+    /**
+     * @var CreateService
+     */
+    private CreateService $forCreateService;
+
     public function __construct()
     {
         $this->forCreateController = new CreateController();
-        $this->forCreateTraitSoftDelete = new CreateTraitSoftDelete();
+        $this->forCreateTraitSoftDelete = new CreateTraits();
         $this->forCreateModel = new CreateModel();
+        $this->forCreateProvider = new CreateProvider();
+        $this->forCreateRequest = new CreateRequest();
+        $this->forCreateResource = new CreateResource();
+        $this->forCreateRoute = new CreateRoute();
+        $this->forCreateService = new CreateService();
     }
 
     /**
@@ -66,59 +96,6 @@ class HandleHelpers
             return substr($name, 0, -1);
         }
         return $name;
-    }
-
-    /**
-     * @param string $projectName
-     * @return string
-     */
-    public function createSoftDelete(string $projectName): string
-    {
-        return $this->forCreateTraitSoftDelete->toTraitSoftDelete($projectName);
-    }
-
-    /**
-     * @param string $projectName
-     * @param string $moduleName
-     * @param string $className
-     * @return string
-     */
-    public function createController(string $projectName, string $moduleName, string $className): string
-    {
-        return $this->forCreateController->toController($projectName, $moduleName, $className);
-    }
-
-    /**
-     * @param string $projectName
-     * @param string $moduleName
-     * @param string $className
-     * @return string
-     */
-    public function createModel(string $projectName, string $moduleName, string $className): string
-    {
-        return $this->forCreateModel->toModel($projectName, $moduleName, $className);
-    }
-
-    /**
-     * @param string $projectName
-     * @param string $moduleName
-     * @param string $className
-     * @return string
-     */
-    public function createModelRepository(string $projectName, string $moduleName, string $className): string
-    {
-        return $this->forCreateModel->toModelRepository($projectName, $moduleName, $className);
-    }
-
-    /**
-     * @param string $projectName
-     * @param string $moduleName
-     * @param string $className
-     * @return string
-     */
-    public function createModelRepositoryInterface(string $projectName, string $moduleName, string $className): string
-    {
-        return $this->forCreateModel->toModelRepositoryInterface($projectName, $moduleName, $className);
     }
 
     /**
@@ -168,5 +145,151 @@ class HandleHelpers
         }
 
         return self::RED . "\033[30mCreate {$moduleName}{$type} Failed!\n" . self::NC;
+    }
+
+    /**
+     * @param string $projectName
+     * @return string
+     */
+    public function createSoftDelete(string $projectName): string
+    {
+        return $this->forCreateTraitSoftDelete->toTraitSoftDelete($projectName);
+    }
+
+    /**
+     * @param string $projectName
+     * @return string
+     */
+    public function createRouteProviderTrait(string $projectName): string
+    {
+        return $this->forCreateTraitSoftDelete->toTraitRouteServiceProvider($projectName);
+    }
+
+    /**
+     * @param string $projectName
+     * @param string $moduleName
+     * @param string $className
+     * @return string
+     */
+    public function createController(string $projectName, string $moduleName, string $className): string
+    {
+        return $this->forCreateController->toController($projectName, $moduleName, $className);
+    }
+
+    /**
+     * @param string $projectName
+     * @param string $moduleName
+     * @param string $className
+     * @return string
+     */
+    public function createModel(string $projectName, string $moduleName, string $className): string
+    {
+        return $this->forCreateModel->toModel($projectName, $moduleName, $className);
+    }
+
+    /**
+     * @param string $projectName
+     * @param string $moduleName
+     * @param string $className
+     * @return string
+     */
+    public function createModelRepository(string $projectName, string $moduleName, string $className): string
+    {
+        return $this->forCreateModel->toModelRepository($projectName, $moduleName, $className);
+    }
+
+    /**
+     * @param string $projectName
+     * @param string $moduleName
+     * @param string $className
+     * @return string
+     */
+    public function createModelRepositoryInterface(string $projectName, string $moduleName, string $className): string
+    {
+        return $this->forCreateModel->toModelRepositoryInterface($projectName, $moduleName, $className);
+    }
+
+    /**
+     * @param string $projectName
+     * @param string $moduleName
+     * @return string
+     */
+    public function createAppServiceProvider(string $projectName, string $moduleName): string
+    {
+        return $this->forCreateProvider->createAppServiceProvider($projectName, $moduleName);
+    }
+
+    /**
+     * @param string $projectName
+     * @param string $moduleName
+     * @return string
+     */
+    public function createRouteServiceProvider(string $projectName, string $moduleName): string
+    {
+        return $this->forCreateProvider->createRouteServiceProvider($projectName, $moduleName);
+    }
+
+    /**
+     * @param string $projectName
+     * @param string $moduleName
+     * @param string $className
+     * @return string
+     */
+    public function createRequest(string $projectName, string $moduleName, string $className): string
+    {
+        return $this->forCreateRequest->toRequest($projectName, $moduleName, $className);
+    }
+
+    /**
+     * @param string $projectName
+     * @param string $moduleName
+     * @param string $className
+     * @return string
+     */
+    public function createCollection(string $projectName, string $moduleName, string $className): string
+    {
+        return $this->forCreateResource->toCollection($projectName, $moduleName, $className);
+    }
+
+    /**
+     * @param string $projectName
+     * @param string $moduleName
+     * @param string $className
+     * @return string
+     */
+    public function createResource(string $projectName, string $moduleName, string $className): string
+    {
+        return $this->forCreateResource->toResource($projectName, $moduleName, $className);
+    }
+
+    /**
+     * @param string $moduleName
+     * @param string $className
+     * @return string
+     */
+    public function createRouteApi(string $moduleName, string $className): string
+    {
+        return $this->forCreateRoute->toApi($moduleName, $className);
+    }
+
+    /**
+     * @param string $moduleName
+     * @param string $className
+     * @return string
+     */
+    public function createRouteWeb(string $moduleName, string $className): string
+    {
+        return $this->forCreateRoute->toWeb($moduleName, $className);
+    }
+
+    /**
+     * @param string $projectName
+     * @param string $moduleName
+     * @param string $className
+     * @return string
+     */
+    public function createService(string $projectName, string $moduleName, string $className): string
+    {
+        return $this->forCreateService->toService($projectName, $moduleName, $className);
     }
 }

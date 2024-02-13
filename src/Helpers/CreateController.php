@@ -26,6 +26,41 @@ class CreateController
                 {
             
                 }
+                
+                public function index()
+                {
+                
+                }
+                
+                public function store()
+                {
+                
+                }
+                
+                public function show()
+                {
+                
+                }
+                
+                public function update()
+                {
+                
+                }
+                
+                public function enable()
+                {
+                
+                }
+                
+                public function disable()
+                {
+                
+                }
+                
+                public function destroy()
+                {
+                
+                }
             }
             PHP;
     }

@@ -4,14 +4,22 @@ namespace Wagner\LaravelModuleCreate\Helpers;
 
 class CreateModel
 {
+    /**
+     * @param string $projectName
+     * @param string $moduleName
+     * @param string $className
+     * @return string
+     */
     public function toModel(string $projectName, string $moduleName, string $className): string
     {
-        $namespace = "App\\" . $projectName . "\\" . $moduleName;
+        $namespace = "App\\" . $projectName . "\\" . $moduleName . "\\Models";
+        $softDelete = "use App\\" . $projectName . "\\Common\\Traits\\SoftDeletes;";
         return <<<PHP
             <?php
             
             namespace {$namespace};
             
+            {$softDelete}
             use Illuminate\Database\Eloquent\Model;
             
             class {$className} extends Model
