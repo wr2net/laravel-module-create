@@ -2,33 +2,16 @@
 
 require_once __DIR__ . "/vendor/autoload.php";
 
-use Wagner\LaravelModuleCreate\Templates\CreateProject;
-use Wagner\LaravelModuleCreate\Templates\CreateModule;
+use Wagner\LaravelModuleCreate\Actions\StartCreate;
 
-const PROJECT = 'project';
+$options = getopt('f:');
+if (isset($options['f'])) {
+    $type = $options['f'];
+    $defineType = explode(":", $type);
 
-$projectName = "";
-$moduleName = "";
-
-$args = getopt('f:');
-$type = $args['f'];
-$defineType = explode(":", $type);
-
-if (sizeof($defineType) > 1) {
-    $moduleName = $defineType[1];
-    $projectName = $defineType[1];
-    if ($defineType[0] != PROJECT) {
-        $projectName = $defineType[0];
+    if (count($defineType) > 1) {
+        StartCreate::create($defineType);
     }
-    $type = $defineType[0];
+    exit;
 }
-
-switch ($type) {
-    case PROJECT:
-        CreateProject::createProject($projectName);
-        break;
-    default:
-        $module = new CreateModule;
-        $module->createFullModule($projectName, $moduleName);
-        break;
-}
+echo "\033[31mNo option provided. Use -f project:ProjectName or -f module:ProjectName:ModuleName\n\033[0m";

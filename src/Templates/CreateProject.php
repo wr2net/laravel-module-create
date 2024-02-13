@@ -2,7 +2,7 @@
 
 namespace Wagner\LaravelModuleCreate\Templates;
 
-use Wagner\LaravelModuleCreate\Helpers\HandleName;
+use Wagner\LaravelModuleCreate\Helpers\HandleHelpers;
 use Wagner\LaravelModuleCreate\Commons\BaseNames;
 
 /**
@@ -14,21 +14,19 @@ class CreateProject extends BaseNames
 {
     /**
      * @param string $folderName
-     * @return bool
+     * @return void
      */
-    public static function createProject(string $folderName): bool
+    public static function createProject(string $folderName): void
     {
-        $handleName = new HandleName();
+        $handleName = new HandleHelpers();
         $folderName = $handleName->handleName($folderName);
 
         if (file_exists(parent::BASE_FOLDER)) {
             $projectFolder = parent::BASE_FOLDER . $folderName;
             if (!file_exists(parent::BASE_FOLDER. $folderName)) {
                 mkdir($projectFolder);
-                return true;
+                echo $handleName->showMessage(parent::BASE_FOLDER . $folderName, $folderName);
             }
-            return false;
         }
-        return false;
     }
 }
