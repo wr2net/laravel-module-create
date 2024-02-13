@@ -17,5 +17,8 @@
     "minimum-stability": "stable",
     "require": {
         "php": "^8.0"
+    },
+    "require-dev": {
+        "spatie/laravel-package-tools": "^1.16"
     }
 }
