@@ -145,7 +145,7 @@ class HandleHelpers extends BaseNames
                     $project = $this->handleName($projectName);
                     $module = $this->handleName($moduleName);
 
-                    echo self::RED .
+                    echo self::GREEN .
                         "\n/* $module Resource */\nApp\\$project\\$module\\Providers\\RouteServiceProvider::class,\nApp\\$project\\$module\\Providers\\AppServiceProvider::class,\n\n" .
                         self::NC;
                 }
