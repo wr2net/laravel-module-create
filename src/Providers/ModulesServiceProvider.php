@@ -14,7 +14,6 @@ class ModulesServiceProvider extends PackageServiceProvider
     {
         $package
             ->name('lm-create')
-            ->hasConfigFile()
             ->hasCommands([
                 GenerateProjectCommand::class,
                 GenerateModuleCommand::class,
@@ -23,7 +22,6 @@ class ModulesServiceProvider extends PackageServiceProvider
             ->hasInstallCommand(function (InstallCommand $command) {
                 $command
                     ->publishConfigFile()
-                    ->askToRunMigrations()
                     ->copyAndRegisterServiceProviderInApp()
                     ->addCommands([
                         GenerateProjectCommand::class,
