@@ -13,7 +13,7 @@ class ModulesServiceProvider extends PackageServiceProvider
     public function configurePackage(Package $package): void
     {
         $package
-            ->name('laravel-module-create')
+            ->name('lm-create')
             ->hasConfigFile()
             ->hasCommands([
                 GenerateProjectCommand::class,
