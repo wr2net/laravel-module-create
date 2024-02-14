@@ -1,5 +1,5 @@
 {
-    "name": "wagner/lm-create",
+    "name": "wr2net/lm-create",
     "description": "LM Create is a complete module create for Laravel.",
     "type": "library",
     "license": "MIT",
