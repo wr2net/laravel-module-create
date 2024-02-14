@@ -1,6 +1,6 @@
 {
-    "name": "wagner/laravel_module_create",
-    "description": "Create complete module on Laravel for new resource.",
+    "name": "wagner/lm-create",
+    "description": "LM Create is a complete module create for Laravel.",
     "type": "library",
     "license": "MIT",
     "autoload": {
