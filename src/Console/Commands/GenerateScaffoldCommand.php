@@ -17,7 +17,7 @@ class GenerateScaffoldCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'create:skeleton {preject} {module}';
+    protected $signature = 'lm-create:skeleton {preject} {module}';
 
     /**
      * The console command description.

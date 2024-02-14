@@ -17,7 +17,7 @@ class GenerateProjectCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'create:project {project}';
+    protected $signature = 'lm-create:project {project}';
 
     /**
      * The console command description.
