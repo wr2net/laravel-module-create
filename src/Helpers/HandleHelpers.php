@@ -1,12 +1,12 @@
 <?php
 
-namespace Wagner\LaravelModuleCreate\Helpers;
+namespace App\LaravelModuleCreate\Helpers;
 
-use Wagner\LaravelModuleCreate\Commons\BaseNames;
+use App\LaravelModuleCreate\Commons\BaseNames;
 
 /**
  * Class HandleHelpers
- * @package Wagner\LaravelModuleCreate\Helpers
+ * @package App\LaravelModuleCreate\Helpers
  */
 class HandleHelpers extends BaseNames
 {

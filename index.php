@@ -2,7 +2,7 @@
 
 require_once __DIR__ . "/vendor/autoload.php";
 
-use Wagner\LaravelModuleCreate\Actions\StartCreate;
+use App\LaravelModuleCreate\Actions\StartCreate;
 
 $options = getopt('f:');
 if (isset($options['f'])) {

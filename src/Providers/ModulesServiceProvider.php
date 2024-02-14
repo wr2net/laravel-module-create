@@ -1,12 +1,12 @@
 <?php
 
-namespace Wagner\LaravelModuleCreate\Providers;
+namespace App\LaravelModuleCreate\Providers;
 
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use Wagner\LaravelModuleCreate\Console\Commands\GenerateProjectCommand;
-use Wagner\LaravelModuleCreate\Console\Commands\GenerateModuleCommand;
-use Wagner\LaravelModuleCreate\Console\Commands\GenerateScaffoldCommand;
+use App\LaravelModuleCreate\Console\Commands\GenerateProjectCommand;
+use App\LaravelModuleCreate\Console\Commands\GenerateModuleCommand;
+use App\LaravelModuleCreate\Console\Commands\GenerateScaffoldCommand;
 
 class ModulesServiceProvider extends PackageServiceProvider
 {

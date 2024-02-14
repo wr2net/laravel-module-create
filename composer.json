@@ -5,12 +5,12 @@
     "license": "MIT",
     "autoload": {
         "psr-4": {
-            "Wagner\\LaravelModuleCreate\\": "src/"
+            "App\\LaravelModuleCreate\\": "src/"
         }
     },
     "authors": [
         {
-            "name": "wr2net",
+            "name": "Wagner Rigoli da Rosa",
             "email": "wagnerr2@gmail.com"
         }
     ],

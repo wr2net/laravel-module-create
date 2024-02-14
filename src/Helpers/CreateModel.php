@@ -1,6 +1,6 @@
 <?php
 
-namespace Wagner\LaravelModuleCreate\Helpers;
+namespace App\LaravelModuleCreate\Helpers;
 
 class CreateModel
 {

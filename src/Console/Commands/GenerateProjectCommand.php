@@ -1,9 +1,9 @@
 <?php
 
-namespace Wagner\LaravelModuleCreate\Console\Commands;
+namespace App\LaravelModuleCreate\Console\Commands;
 
 use Illuminate\Console\Command;
-use Wagner\LaravelModuleCreate\Actions\StartCreate;
+use App\LaravelModuleCreate\Actions\StartCreate;
 
 class GenerateProjectCommand extends Command
 {

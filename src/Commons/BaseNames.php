@@ -1,6 +1,6 @@
 <?php
 
-namespace Wagner\LaravelModuleCreate\Commons;
+namespace App\LaravelModuleCreate\Commons;
 
 class BaseNames
 {

@@ -1,13 +1,13 @@
 <?php
 
-namespace Wagner\LaravelModuleCreate\Templates;
+namespace App\LaravelModuleCreate\Templates;
 
-use Wagner\LaravelModuleCreate\Helpers\HandleHelpers;
-use Wagner\LaravelModuleCreate\Commons\BaseNames;
+use App\LaravelModuleCreate\Helpers\HandleHelpers;
+use App\LaravelModuleCreate\Commons\BaseNames;
 
 /**
  * Class CreateProject
- * @package Wagner\LaravelModuleCreate\Templates
+ * @package App\LaravelModuleCreate\Templates
  * @extends BaseNames
  */
 class CreateProject extends BaseNames
