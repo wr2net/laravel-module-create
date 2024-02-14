@@ -18,16 +18,15 @@ class ModulesServiceProvider extends PackageServiceProvider
                 GenerateProjectCommand::class,
                 GenerateModuleCommand::class,
                 GenerateScaffoldCommand::class,
-            ])
-            ->hasInstallCommand(function (InstallCommand $command) {
-                $command
-                    ->publishConfigFile()
-                    ->copyAndRegisterServiceProviderInApp()
-                    ->addCommands([
-                        GenerateProjectCommand::class,
-                        GenerateModuleCommand::class,
-                        GenerateScaffoldCommand::class,
-                    ]);
-            });
+            ]);
+    }
+
+    public function register()
+    {
+        $this->commands([
+            GenerateProjectCommand::class,
+            GenerateModuleCommand::class,
+            GenerateScaffoldCommand::class,
+        ]);
     }
 }
