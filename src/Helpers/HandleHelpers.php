@@ -2,11 +2,13 @@
 
 namespace Wagner\LaravelModuleCreate\Helpers;
 
+use Wagner\LaravelModuleCreate\Commons\BaseNames;
+
 /**
  * Class HandleHelpers
  * @package Wagner\LaravelModuleCreate\Helpers
  */
-class HandleHelpers
+class HandleHelpers extends BaseNames
 {
     const PROJECT = "P";
     const MODULE = "M";
@@ -102,13 +104,25 @@ class HandleHelpers
      * @param string $type
      * @param int $stage
      * @param string|null $toShow
+     * @param string|null $projectName
+     * @param string|null $moduleName
      * @return void
      */
-    public function beginOrEnd(string $type, int $stage, string $toShow = null):void
-    {
+    public function beginOrEnd(
+        string $type,
+        int $stage,
+        string $toShow = null,
+        string $projectName = null,
+        string $moduleName = null,
+    ):void {
         $inStage = [
             "Starting",
             "Finished"
+        ];
+        $forCreate = [
+            "Project",
+            "Module",
+            "Resource",
         ];
 
         switch ($type) {
@@ -123,11 +137,28 @@ class HandleHelpers
                     self::NC;
                 break;
             case self::SCAFFOLD:
+                if ($stage == 1) {
+                    echo self::CYAN .
+                        "\n # Register your new Module Resource in config/app.php on key 'providers':\n" .
+                        self::NC;
+
+                    $project = $this->handleName($projectName);
+                    $module = $this->handleName($moduleName);
+
+                    echo self::RED .
+                        "\n/* $module Resource */\nApp\\$project\\$module\\Providers\\RouteServiceProvider::class,\nApp\\$project\\$module\\Providers\\AppServiceProvider::class,\n\n" .
+                        self::NC;
+                }
+
                 echo self::YELLOW .
                     "{$inStage[$stage]} Configuration your Module Resource: {$this->handleName($toShow)}\n" .
                     self::NC;
                 break;
             default:
+                echo self::CYAN .
+                    "[ X ] {$forCreate[$stage]} {$this->handleName($toShow)} already exists.\n" .
+                    self::NC;
+                break;
                 break;
         }
     }
@@ -141,7 +172,7 @@ class HandleHelpers
     public function showMessage(string $fullPath, string $moduleName, string $type = ""): string
     {
         if (file_exists($fullPath)) {
-            return self::GREEN . "{$moduleName}{$type} created Successfully!\n" . self::NC;
+            return self::GREEN . " [ x ] {$moduleName}{$type} created Successfully!\n" . self::NC;
         }
 
         return self::RED . "\033[30mCreate {$moduleName}{$type} Failed!\n" . self::NC;
@@ -291,5 +322,27 @@ class HandleHelpers
     public function createService(string $projectName, string $moduleName, string $className): string
     {
         return $this->forCreateService->toService($projectName, $moduleName, $className);
+    }
+
+    /**
+     * @param string $projectName
+     * @param string|null $moduleName
+     * @return bool
+     */
+    public function checking(string $projectName, string $moduleName = null): bool
+    {
+        $projectName = $this->handleName($projectName);
+        if (is_dir(parent::BASE_FOLDER . $projectName) && is_null($moduleName)) {
+            return false;
+        }
+
+        if (!is_null($moduleName)) {
+            $moduleName = $this->handleName($moduleName);
+            if (is_dir(parent::BASE_FOLDER . $projectName . '/' . $moduleName)) {
+                return false;
+            }
+        }
+
+        return true;
     }
 }

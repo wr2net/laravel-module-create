@@ -130,8 +130,7 @@ class CreateScaffold extends BaseNames
         $className = "{$this->handleHelper->handleS($moduleName)}";
         $fileName = "{$className}Controller.php";
 
-        mkdir($path . '/' . $folderName);
-        mkdir($path . '/' . $folderName . '/' . $subFolderName);
+        $this->createFolder($path, $folderName, $subFolderName);
         file_put_contents(
             $path . '/' . $folderName . '/' . $subFolderName . '/' . $fileName,
             $this->handleHelper->createController($projectName, $moduleName, $className)
@@ -156,8 +155,7 @@ class CreateScaffold extends BaseNames
         $fileNameRepository = "{$className}Repository.php";
         $fileNameRepositoryInterface = "{$className}RepositoryInterface.php";
 
-        mkdir($path . '/' . $folderName);
-        mkdir($path . '/' . $folderName . '/' . $subFolderName);
+        $this->createFolder($path, $folderName, $subFolderName);
         file_put_contents(
             $path . '/' . $folderName . '/' . $fileName,
             $this->handleHelper->createModel($projectName, $moduleName, $className)
@@ -187,8 +185,7 @@ class CreateScaffold extends BaseNames
         $fileNameApp = "AppServiceProvider.php";
         $fileNameRoute = "RouteServiceProvider.php";
 
-        mkdir($path . '/' . $folderName);
-
+        $this->createFolder($path, $folderName);
         file_put_contents(
             $path . '/' . $folderName . '/' . $fileNameApp,
             $this->handleHelper->createAppServiceProvider($projectName, $moduleName)
@@ -216,7 +213,7 @@ class CreateScaffold extends BaseNames
         $className = "{$this->handleHelper->handleS($moduleName)}";
         $fileName = "{$className}Request.php";
 
-        mkdir($path . '/' . $folderName);
+        $this->createFolder($path, $folderName);
         file_put_contents(
             $path . '/' . $folderName . '/' . $fileName,
             $this->handleHelper->createRequest($projectName, $moduleName, $className)
@@ -239,7 +236,7 @@ class CreateScaffold extends BaseNames
         $fileNameCollection = "{$className}Collection.php";
         $fileNameResource = "{$className}Resource.php";
 
-        mkdir($path . '/' . $folderName);
+        $this->createFolder($path, $folderName);
         file_put_contents(
             $path . '/' . $folderName . '/' . $fileNameCollection,
             $this->handleHelper->createCollection($projectName, $moduleName, $className)
@@ -264,8 +261,8 @@ class CreateScaffold extends BaseNames
     {
         $folderName = 'Routes';
         $className = "{$this->handleHelper->handleS($moduleName)}";
-        mkdir($path . '/' . $folderName);
 
+        $this->createFolder($path, $folderName);
         file_put_contents(
             $path . '/' . $folderName . '/api.php',
             $this->handleHelper->createRouteApi($moduleName, $className)
@@ -293,7 +290,7 @@ class CreateScaffold extends BaseNames
         $className = $this->handleHelper->handleS($moduleName);
         $fileName = "{$className}Service.php";
 
-        mkdir($path . '/' . $folderName);
+        $this->createFolder($path, $folderName);
         file_put_contents(
             $path . '/' . $folderName . '/' . $fileName,
             $this->handleHelper->createService($projectName, $moduleName, $className)
@@ -310,5 +307,24 @@ class CreateScaffold extends BaseNames
     {
         mkdir($path . '/' . self::COMMON);
         mkdir($path . '/' . self::COMMON . '/' . self::TRAITS);
+    }
+
+    /**
+     * @param string $path
+     * @param string $folderName
+     * @param string|null $subFolderName
+     * @return void
+     */
+    private function createFolder(string $path, string $folderName, string $subFolderName = null): void
+    {
+        if (!is_dir($path . '/' . $folderName)) {
+            mkdir($path . '/' . $folderName);
+        }
+
+        if (!is_null($subFolderName)) {
+            if (!is_dir($path . '/' . $folderName . '/' . $subFolderName)) {
+                mkdir($path . '/' . $folderName . '/' . $subFolderName);
+            }
+        }
     }
 }
