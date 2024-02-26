@@ -28,7 +28,7 @@ class CreateService
             {$model}
             {$repository}
             
-            class BenefitService
+            class {$className}
             {
                 private {$repositoryProperty};
             
