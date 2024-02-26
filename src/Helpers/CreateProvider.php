@@ -73,6 +73,8 @@ class CreateProvider
         return <<<PHP
             <?php
             
+            namespace {$namespace};
+            
             use {$routeTrait};
             use {$model};
             use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
