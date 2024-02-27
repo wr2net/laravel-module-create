@@ -62,6 +62,7 @@ class CreateProvider
         $className = (new HandleHelpers)->handleS($moduleName);
         $modelName = strtolower($className);
         $namespace = "App\\" . $projectName . "\\" . $moduleName . "\\Providers";
+        $controller = "App\\" . $projectName . "\\" . $moduleName . "\\Controllers";
         $routeTrait = "App\\{$projectName}\\Common\\Traits\\RouteServiceProviderTrait";
         $model = "App\\{$projectName}\\{$moduleName}\\Models\\{$className}";
 
@@ -91,7 +92,7 @@ class CreateProvider
                  *
                  * @var string
                  */
-                protected {$toNamespace} = '{$namespace}';
+                protected {$toNamespace} = '{$controller}';
             
                 /**
                  * @var string
