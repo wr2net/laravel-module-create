@@ -18,7 +18,8 @@ class ModulesServiceProvider extends PackageServiceProvider
                 GenerateProjectCommand::class,
                 GenerateModuleCommand::class,
                 GenerateScaffoldCommand::class,
-            ]);
+            ])
+            ->hasConfigFile();
     }
 
     public function register(): void
