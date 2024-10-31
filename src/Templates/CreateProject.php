@@ -24,7 +24,7 @@ class CreateProject extends BaseNames
         if (file_exists(parent::BASE_FOLDER)) {
             $projectFolder = parent::BASE_FOLDER . $folderName;
             if (!file_exists(parent::BASE_FOLDER. $folderName)) {
-                mkdir($projectFolder);
+                $handleName->createDirectory($projectFolder);
                 echo $handleName->showMessage(parent::BASE_FOLDER . $folderName, $folderName);
             }
         }

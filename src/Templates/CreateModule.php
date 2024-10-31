@@ -5,7 +5,6 @@ namespace App\LaravelModuleCreate\Templates;
 use App\LaravelModuleCreate\Commons\BaseNames;
 use App\LaravelModuleCreate\Helpers\HandleHelpers;
 
-
 /**
  * Class CreateModel
  * @package App\LaravelModuleCreate\Templates
@@ -41,9 +40,11 @@ class CreateModule extends BaseNames
     private function createFolder($project, $module): void
     {
         $projectName = $this->handleHelper->handleName($project);
-        $moduleName = $this->handleHelper->handleName($module);
+        $moduleName = $this->handleHelper->handleS(
+            $this->handleHelper->handleName($module)
+        );
         if (file_exists(parent::BASE_FOLDER . '/' . $projectName)) {
-            mkdir(parent::BASE_FOLDER . '/' . $projectName . '/' . $moduleName);
+            $this->handleHelper->createDirectory(parent::BASE_FOLDER . '/' . $projectName . '/' . $moduleName);
             echo $this->handleHelper->showMessage(
                 parent::BASE_FOLDER . '/' . $projectName . '/' . $moduleName,
                 $moduleName

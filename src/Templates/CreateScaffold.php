@@ -41,8 +41,10 @@ class CreateScaffold extends BaseNames
     public function createScaffold(string $projectName, string $moduleName): void
     {
         $projectName = $this->handleHelper->handleName($projectName);
-        $moduleName = $this->handleHelper->handleName($moduleName);
-        $path = parent::BASE_FOLDER . '/' . $projectName . '/' . $moduleName;
+        $moduleNameModule = $this->handleHelper->handleS(
+            $this->handleHelper->handleName($moduleName)
+        );
+        $path = parent::BASE_FOLDER . '/' . $projectName . '/' . $moduleNameModule;
 
         if (file_exists($path)) {
             if (!file_exists(parent::BASE_FOLDER . '/' . $projectName . '/' . self::COMMON)) {
@@ -73,8 +75,7 @@ class CreateScaffold extends BaseNames
         }
 
         if (!file_exists($path)) {
-            $module = new CreateModule();
-            $module->createFullModule($projectName, $moduleName);
+            (new CreateModule())->createFullModule($projectName, $moduleName);
             self::createScaffold($projectName, $moduleName);
         }
     }
@@ -127,7 +128,7 @@ class CreateScaffold extends BaseNames
     {
         $folderName = 'Controllers';
         $subFolderName = 'Api';
-        $className = "{$this->handleHelper->handleS($moduleName)}";
+        $className = "{$this->handleHelper->handleName($moduleName)}";
         $fileName = "{$className}Controller.php";
 
         $this->createFolder($path, $folderName, $subFolderName);
@@ -150,7 +151,7 @@ class CreateScaffold extends BaseNames
     {
         $folderName = 'Models';
         $subFolderName = 'Repositories';
-        $className = $this->handleHelper->handleS($moduleName);
+        $className = $this->handleHelper->handleName($moduleName);
         $fileName = "{$className}.php";
         $fileNameRepository = "{$className}Repository.php";
         $fileNameRepositoryInterface = "{$className}RepositoryInterface.php";
@@ -210,7 +211,7 @@ class CreateScaffold extends BaseNames
     private function handleCreateRequest(string $path, string $projectName, string $moduleName): void
     {
         $folderName = 'Requests';
-        $className = "{$this->handleHelper->handleS($moduleName)}";
+        $className = "{$this->handleHelper->handleName($moduleName)}";
         $fileName = "{$className}Request.php";
 
         $this->createFolder($path, $folderName);
@@ -232,7 +233,7 @@ class CreateScaffold extends BaseNames
     private function handleCreateResource(string $path, string $projectName, string $moduleName): void
     {
         $folderName = 'Resources';
-        $className = $this->handleHelper->handleS($moduleName);
+        $className = $this->handleHelper->handleName($moduleName);
         $fileNameCollection = "{$className}Collection.php";
         $fileNameResource = "{$className}Resource.php";
 
@@ -260,7 +261,7 @@ class CreateScaffold extends BaseNames
     private function handleCreateRoute(string $path, string $moduleName): void
     {
         $folderName = 'Routes';
-        $className = "{$this->handleHelper->handleS($moduleName)}";
+        $className = "{$this->handleHelper->handleName($moduleName)}";
 
         $this->createFolder($path, $folderName);
         file_put_contents(
@@ -287,7 +288,7 @@ class CreateScaffold extends BaseNames
     private function handleCreateService(string $path, string $projectName, string $moduleName): void
     {
         $folderName = 'Services';
-        $className = $this->handleHelper->handleS($moduleName);
+        $className = $this->handleHelper->handleName($moduleName);
         $fileName = "{$className}Service.php";
 
         $this->createFolder($path, $folderName);
@@ -305,8 +306,8 @@ class CreateScaffold extends BaseNames
      */
     private function handleCommon(string $path): void
     {
-        mkdir($path . '/' . self::COMMON);
-        mkdir($path . '/' . self::COMMON . '/' . self::TRAITS);
+        $this->handleHelper->createDirectory($path . '/' . self::COMMON);
+        $this->handleHelper->createDirectory($path . '/' . self::COMMON . '/' . self::TRAITS);
     }
 
     /**
@@ -318,12 +319,12 @@ class CreateScaffold extends BaseNames
     private function createFolder(string $path, string $folderName, string $subFolderName = null): void
     {
         if (!is_dir($path . '/' . $folderName)) {
-            mkdir($path . '/' . $folderName);
+            $this->handleHelper->createDirectory($path . '/' . $folderName);
         }
 
         if (!is_null($subFolderName)) {
             if (!is_dir($path . '/' . $folderName . '/' . $subFolderName)) {
-                mkdir($path . '/' . $folderName . '/' . $subFolderName);
+                $this->handleHelper->createDirectory($path . '/' . $folderName . '/' . $subFolderName);
             }
         }
     }

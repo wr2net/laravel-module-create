@@ -21,7 +21,7 @@ class ModulesServiceProvider extends PackageServiceProvider
             ]);
     }
 
-    public function register()
+    public function register(): void
     {
         $this->commands([
             GenerateProjectCommand::class,

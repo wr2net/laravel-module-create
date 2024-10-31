@@ -17,17 +17,17 @@ class GenerateScaffoldCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'lm-create:skeleton {preject} {module}';
+    protected string $signature = 'lm-create:skeleton {project} {module}';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Generate Scaffold';
+    protected string $description = 'Generate Scaffold';
 
 
-    public function handle()
+    public function handle(): void
     {
         $options = getopt('f:');
         if (isset($options['f'])) {
@@ -39,6 +39,6 @@ class GenerateScaffoldCommand extends Command
             }
             exit;
         }
-        echo "\033[31mNo option provided. Use create:skeleton ProjectName ModuleName\n\033[0m";
+        echo "\033[31m No option provided. Use create:skeleton ProjectName ModuleName \n\033[0m";
     }
 }

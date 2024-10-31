@@ -13,7 +13,7 @@ class CreateRequest
     public function toRequest(string $projectName, string $moduleName, string $className): string
     {
         $namespace = "App\\" . $projectName . "\\" . $moduleName . "\\Requests";
-        $modelModule = '$this->' . strtolower((new HandleHelpers)->handleS($moduleName));
+        $modelModule = '$this->' . strtolower($moduleName);
         return <<<PHP
             <?php
             
@@ -22,7 +22,7 @@ class CreateRequest
             use Illuminate\Foundation\Http\FormRequest;
             use Illuminate\Validation\Rule;
             
-            class {$className} extends FormRequest
+            class {$className}Request extends FormRequest
             {
                 /**
                  * Determine if the user is authorized to make this request.

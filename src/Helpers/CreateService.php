@@ -12,7 +12,7 @@ class CreateService
      */
     public function toService(string $projectName, string $moduleName, string $className): string
     {
-        $resource = (new HandleHelpers)->handleS($className);
+        $resource = $className;
         $base = "App\\" . $projectName . "\\" . $moduleName . "\\";
         $namespace = $base . "Services";
         $model = "use " . $base . "Models\\" . $className . ";";
@@ -28,7 +28,7 @@ class CreateService
             {$model}
             {$repository}
             
-            class {$className}
+            class {$className}Service
             {
                 private {$repositoryProperty};
             

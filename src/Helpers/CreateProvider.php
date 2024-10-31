@@ -13,8 +13,8 @@ class CreateProvider
     {
         $className = (new HandleHelpers)->handleS($moduleName);
         $namespace = "App\\" . $projectName . "\\" . $moduleName . "\\Providers";
-        $setRepositoryInterface = "App\\" . $projectName . "\\" . $moduleName . "\\Models\\Repositories\\" . $className . "RepositoryInterface";
-        $setRepository = "App\\" . $projectName . "\\" . $moduleName . "\\Models\\Repositories\\" . $className . "Repository";
+        $setRepositoryInterface = "App\\" . $projectName . "\\" . $className . "\\Models\\Repositories\\" . $moduleName . "RepositoryInterface";
+        $setRepository = "App\\" . $projectName . "\\" . $className . "\\Models\\Repositories\\" . $moduleName . "Repository";
         $app = '$this->app';
 
         return <<<PHP
@@ -61,58 +61,58 @@ class CreateProvider
     {
         $className = (new HandleHelpers)->handleS($moduleName);
         $modelName = strtolower($className);
-        $namespace = "App\\" . $projectName . "\\" . $moduleName . "\\Providers";
-        $controller = "App\\" . $projectName . "\\" . $moduleName . "\\Controllers";
+        $namespace = "App\\" . $projectName . "\\" . $className . "\\Providers";
+        $controller = "App\\" . $projectName . "\\" . $className . "\\Controllers";
         $routeTrait = "App\\{$projectName}\\Common\\Traits\\RouteServiceProviderTrait";
-        $model = "App\\{$projectName}\\{$moduleName}\\Models\\{$className}";
+        $model = "App\\{$projectName}\\{$moduleName}\\Models\\{$modelName}";
 
         $toNamespace = '$namespace';
         $routePath = '$routePath';
-        $toRoutePath = "{$projectName}\\{$moduleName}\\Routes";
+        $toRoutePath = "{$projectName}\\{$className}\\Routes";
         $value = '$value';
 
         return <<<PHP
-            <?php
+        <?php
+        
+        namespace {$namespace};
+        
+        use {$routeTrait};
+        use {$model};
+        use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
+        use Illuminate\Support\Facades\Route;
+        
+        class RouteServiceProvider extends ServiceProvider
+        {
+            use RouteServiceProviderTrait;
             
-            namespace {$namespace};
+            /**
+            * This namespace is applied to your controller routes.
+            *
+            * In addition, it is set as the URL generator's root namespace.
+            *
+            * @var string
+            */
+            protected {$toNamespace} = '{$controller}';
             
-            use {$routeTrait};
-            use {$model};
-            use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
-            use Illuminate\Support\Facades\Route;
+            /**
+            * @var string
+            */
+            protected {$routePath} = '{$toRoutePath}';
             
-            class RouteServiceProvider extends ServiceProvider
+            /**
+            * Define your route model bindings, pattern filters, etc.
+            *
+            * @return void
+            */
+            public function boot()
             {
-                use RouteServiceProviderTrait;
+                Route::bind('{$moduleName}', function ({$value}) {
+                    return {$moduleName}::withTrashed()->find({$value});
+                });
             
-                /**
-                 * This namespace is applied to your controller routes.
-                 *
-                 * In addition, it is set as the URL generator's root namespace.
-                 *
-                 * @var string
-                 */
-                protected {$toNamespace} = '{$controller}';
-            
-                /**
-                 * @var string
-                 */
-                protected {$routePath} = '{$toRoutePath}';
-            
-                /**
-                 * Define your route model bindings, pattern filters, etc.
-                 *
-                 * @return void
-                 */
-                public function boot()
-                {
-                    Route::bind('{$modelName}', function ({$value}) {
-                        return {$className}::withTrashed()->find({$value});
-                    });
-            
-                    parent::boot();
-                }
+                parent::boot();
             }
+        }
         PHP;
     }
 }
