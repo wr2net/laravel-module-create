@@ -17,17 +17,17 @@ class GenerateModuleCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'lm-create:module {project} {module}';
+    protected string $signature = 'lm-create:module {project} {module}';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Generate Module';
+    protected string $description = 'Generate Module';
 
 
-    public function handle()
+    public function handle(): void
     {
         $options = getopt('f:');
         if (isset($options['f'])) {
@@ -39,6 +39,6 @@ class GenerateModuleCommand extends Command
             }
             exit;
         }
-        echo "\033[31mNo option provided. Use create:Module ProjectName ModuleName\n\033[0m";
+        echo "\033[31m No option provided. Use create:Module ProjectName ModuleName \n\033[0m";
     }
 }

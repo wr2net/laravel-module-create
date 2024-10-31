@@ -39,8 +39,7 @@ class StartCreate
                 if (isset($defineType[1]) && isset($defineType[2])) {
                     if ((new HandleHelpers)->checking($defineType[1], $defineType[2])) {
                         (new HandleHelpers)->beginOrEnd("M", 0, $defineType[2]);
-                        $module = new CreateModule;
-                        $module->createFullModule($defineType[1], $defineType[2]);
+                        (new CreateModule)->createFullModule($defineType[1], $defineType[2]);
                         (new HandleHelpers)->beginOrEnd("M", 1, $defineType[2]);
                         break;
                     }
@@ -52,8 +51,7 @@ class StartCreate
             case self::SCAFFOLD:
                 if (isset($defineType[1]) && isset($defineType[2])) {
                     (new HandleHelpers)->beginOrEnd("S", 0, $defineType[2]);
-                    $scaffold = new CreateScaffold;
-                    $scaffold->createScaffold($defineType[1], $defineType[2]);
+                    (new CreateScaffold)->createScaffold($defineType[1], $defineType[2]);
                     (new HandleHelpers)->beginOrEnd("S", 1, $defineType[2], $defineType[1], $defineType[2]);
                     break;
                 }

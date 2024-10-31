@@ -1,6 +1,6 @@
-# LM Create
+# Laravel Module Create
 
-LM Create is a complete module create for Laravel.
+Laravel Module Create is a complete module create for Laravel.
 
 ## # Using Artisan
 ### To create a project:

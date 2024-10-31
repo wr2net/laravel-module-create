@@ -46,7 +46,7 @@ class CreateModel
             
             {$model};
             
-            class {$className}Repository implements {$className}Interface
+            class {$className}Repository implements {$className}RepositoryInterface
             {
                 
             }

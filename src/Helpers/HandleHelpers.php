@@ -21,6 +21,37 @@ class HandleHelpers extends BaseNames
     const NC = "\033[0m";
 
     /**
+     * @var array
+     */
+    private array $addES = [
+        'ch',
+        's',
+        'ss',
+        'sh',
+        'x',
+        'z'
+    ];
+
+    /**
+     * @var array
+     */
+    private array $addVES = [
+        'f',
+        'fe'
+    ];
+
+    /**
+     * @var array
+     */
+    private array $vowels = [
+        'a',
+        'e',
+        'i',
+        'o',
+        'u',
+    ];
+
+    /**
      * @var CreateTraits
      */
     private CreateTraits $forCreateTraitSoftDelete;
@@ -84,7 +115,6 @@ class HandleHelpers extends BaseNames
             $name = ucwords($name);
             return str_replace(' ', '', $name);
         }
-
         return ucfirst($name);
     }
 
@@ -94,9 +124,49 @@ class HandleHelpers extends BaseNames
      */
     public function handleS($name): string
     {
-        if (str_ends_with($name, "s")) {
-            return substr($name, 0, -1);
+        $origin = $name;
+        $char3 = substr($name, -3);
+        $char2 = substr($name, -2);
+        $char1 = substr($name, -1);
+
+        if (in_array($char2, $this->addES) || in_array($char1, $this->addES)) {
+            $name = $name . 'es';
         }
+
+        if (in_array($char2, $this->addVES) || in_array($char1, $this->addVES)) {
+            $len = strlen($name);
+            $check = substr($char2, 1);
+            $count = $len - 2;
+            $prefix = substr($name, 0, $count);
+            if ($check != 'e') {
+                $count = $len - 1;
+                $prefix = substr($name, 0, $count);
+            }
+            $name = $prefix . 'ves';
+        }
+
+        if ($char1 == "y") {
+            $len = strlen($name);
+            $count = $len - 1;
+            $prefix = substr($name, 0, $count);
+            $name = $prefix . 'ies';
+            $char0 = substr($char2, 0, -1);
+            if (in_array($char0, $this->vowels)) {
+                $name = $origin . 's';
+            }
+        }
+
+        if ($char3 == "man") {
+            $len = strlen($name);
+            $count = $len - 3;
+            $prefix = substr($name, 0, $count);
+            $name = $prefix . 'men';
+        }
+
+        if ($name === $origin) {
+            $name = $name . 's';
+        }
+
         return $name;
     }
 
@@ -133,17 +203,23 @@ class HandleHelpers extends BaseNames
                 break;
             case self::MODULE:
                 echo self::PURPLE .
-                    "{$inStage[$stage]} Configuration your Module: {$this->handleName($toShow)}\n" .
+                    "{$inStage[$stage]} Configuration your Module: {$this->handleS($this->handleName($toShow))}\n" .
                     self::NC;
                 break;
             case self::SCAFFOLD:
                 if ($stage == 1) {
+                    echo "\n # For Laravel versions below 11";
                     echo self::CYAN .
-                        "\n # Register your new Module Resource in config/app.php on key 'providers':\n" .
+                        "\n # Register your new Module Resource in config/app.php on key 'providers'\n" .
+                        self::NC;
+
+                    echo "\n # For Laravel versions above 11";
+                    echo self::CYAN .
+                        "\n # Register your new Module Resource in bootstrap/providers.php '\n" .
                         self::NC;
 
                     $project = $this->handleName($projectName);
-                    $module = $this->handleName($moduleName);
+                    $module = $this->handleS($this->handleName($moduleName));
 
                     echo self::GREEN .
                         "\n/* $module Resource */\nApp\\$project\\$module\\Providers\\RouteServiceProvider::class,\nApp\\$project\\$module\\Providers\\AppServiceProvider::class,\n\n" .
@@ -158,7 +234,6 @@ class HandleHelpers extends BaseNames
                 echo self::CYAN .
                     "[ X ] {$forCreate[$stage]} {$this->handleName($toShow)} already exists.\n" .
                     self::NC;
-                break;
                 break;
         }
     }
@@ -344,5 +419,15 @@ class HandleHelpers extends BaseNames
         }
 
         return true;
+    }
+
+    /**
+     * @param string $path
+     * @return void
+     */
+    public function createDirectory(string $path): void
+    {
+        mkdir($path);
+        chown($path, exec('whoami'));
     }
 }
