@@ -129,6 +129,7 @@ class CreateScaffold extends BaseNames
         $folderName = 'Controllers';
         $subFolderName = 'Api';
         $className = "{$this->handleHelper->handleName($moduleName)}";
+        $moduleName = $this->handleHelper->handleS($moduleName);
         $fileName = "{$className}Controller.php";
 
         $this->createFolder($path, $folderName, $subFolderName);
@@ -152,6 +153,7 @@ class CreateScaffold extends BaseNames
         $folderName = 'Models';
         $subFolderName = 'Repositories';
         $className = $this->handleHelper->handleName($moduleName);
+        $moduleName = $this->handleHelper->handleS($moduleName);
         $fileName = "{$className}.php";
         $fileNameRepository = "{$className}Repository.php";
         $fileNameRepositoryInterface = "{$className}RepositoryInterface.php";
@@ -212,6 +214,7 @@ class CreateScaffold extends BaseNames
     {
         $folderName = 'Requests';
         $className = "{$this->handleHelper->handleName($moduleName)}";
+        $moduleName = $this->handleHelper->handleS($moduleName);
         $fileName = "{$className}Request.php";
 
         $this->createFolder($path, $folderName);
@@ -234,6 +237,7 @@ class CreateScaffold extends BaseNames
     {
         $folderName = 'Resources';
         $className = $this->handleHelper->handleName($moduleName);
+        $moduleName = $this->handleHelper->handleS($moduleName);
         $fileNameCollection = "{$className}Collection.php";
         $fileNameResource = "{$className}Resource.php";
 
@@ -289,6 +293,7 @@ class CreateScaffold extends BaseNames
     {
         $folderName = 'Services';
         $className = $this->handleHelper->handleName($moduleName);
+        $moduleName = $this->handleHelper->handleS($moduleName);
         $fileName = "{$className}Service.php";
 
         $this->createFolder($path, $folderName);

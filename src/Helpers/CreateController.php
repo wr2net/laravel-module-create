@@ -12,7 +12,7 @@ class CreateController
      */
     public function toController(string $projectName, string $moduleName, string $className): string
     {
-        $namespace = "App\\" . $projectName . "\\" . $moduleName;
+        $namespace = "App\\" . $projectName . "\\" . $moduleName . "\\Controllers\\Api";
         return <<<PHP
             <?php
             
