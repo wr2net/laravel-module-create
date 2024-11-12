@@ -11,10 +11,11 @@ class CreateProvider
      */
     public function createAppServiceProvider(string $projectName, string $moduleName): string
     {
-        $className = (new HandleHelpers)->handleS($moduleName);
+        $className = (new HandleHelpers)->handleName($moduleName);
+        $moduleName = (new HandleHelpers)->handleS($moduleName);
         $namespace = "App\\" . $projectName . "\\" . $moduleName . "\\Providers";
-        $setRepositoryInterface = "App\\" . $projectName . "\\" . $className . "\\Models\\Repositories\\" . $moduleName . "RepositoryInterface";
-        $setRepository = "App\\" . $projectName . "\\" . $className . "\\Models\\Repositories\\" . $moduleName . "Repository";
+        $setRepositoryInterface = "App\\" . $projectName . "\\" . $moduleName . "\\Models\\Repositories\\" . $className . "RepositoryInterface";
+        $setRepository = "App\\" . $projectName . "\\" . $moduleName . "\\Models\\Repositories\\" . $className . "Repository";
         $app = '$this->app';
 
         return <<<PHP
@@ -59,16 +60,17 @@ class CreateProvider
      */
     public function createRouteServiceProvider(string $projectName, string $moduleName): string
     {
-        $className = (new HandleHelpers)->handleS($moduleName);
+        $className = (new HandleHelpers)->handleName($moduleName);
+        $moduleName = (new HandleHelpers)->handleS($moduleName);
         $modelName = strtolower($className);
-        $namespace = "App\\" . $projectName . "\\" . $className . "\\Providers";
-        $controller = "App\\" . $projectName . "\\" . $className . "\\Controllers";
+        $namespace = "App\\" . $projectName . "\\" . $moduleName . "\\Providers";
+        $controller = "App\\" . $projectName . "\\" . $moduleName . "\\Controllers";
         $routeTrait = "App\\{$projectName}\\Common\\Traits\\RouteServiceProviderTrait";
-        $model = "App\\{$projectName}\\{$moduleName}\\Models\\{$modelName}";
+        $model = "App\\{$projectName}\\{$moduleName}\\Models\\{$className}";
 
         $toNamespace = '$namespace';
         $routePath = '$routePath';
-        $toRoutePath = "{$projectName}\\{$className}\\Routes";
+        $toRoutePath = "{$projectName}\\{$moduleName}\\Routes";
         $value = '$value';
 
         return <<<PHP
@@ -106,8 +108,8 @@ class CreateProvider
             */
             public function boot()
             {
-                Route::bind('{$moduleName}', function ({$value}) {
-                    return {$moduleName}::withTrashed()->find({$value});
+                Route::bind('{$modelName}', function ({$value}) {
+                    return {$className}::withTrashed()->find({$value});
                 });
             
                 parent::boot();

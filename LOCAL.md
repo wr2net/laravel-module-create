@@ -5,7 +5,7 @@
 
 ```bash
 
-php index.php -f project:Project
+php src/Config/lm-create.php -f project:Project
 
 ```
 
@@ -14,7 +14,7 @@ php index.php -f project:Project
 
 ```bash
 
-php index.php -f module:MyProject:MyModule
+php src/Config/lm-create.php -f module:MyProject:MyModule
 
 ```
 
@@ -23,7 +23,7 @@ php index.php -f module:MyProject:MyModule
 
 ```bash
 
-php index.php -f skeleton:MyProject:MyModule
+php src/Config/lm-create.php -f skeleton:MyProject:MyModule
 
 ```
 
@@ -36,7 +36,7 @@ eg:
 
 ```bash
 
-php index.php -f project:'My Project'
+php src/Config/lm-create.php -f project:'My Project'
 
 ```
 
