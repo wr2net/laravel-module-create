@@ -3,6 +3,12 @@
     "description": "LM Create is a complete module create for Laravel.",
     "type": "library",
     "license": "MIT",
+    "keywords": [
+        "laravel",
+        "development",
+        "modules",
+        "operations"
+    ],
     "autoload": {
         "psr-4": {
             "App\\LaravelModuleCreate\\": "src/"
@@ -11,14 +17,24 @@
     "authors": [
         {
             "name": "Wagner Rigoli da Rosa",
-            "email": "wagnerr2@gmail.com"
+            "email": "wagnerr2@gmail.com",
+            "homepage": "https://wagner.fawacom.com.br",
+            "role": "Developer"
         }
     ],
     "minimum-stability": "stable",
     "require": {
-        "php": "^8.0"
+        "php": "^8.0",
+        "illuminate/support": "^11.34"
     },
     "require-dev": {
         "spatie/laravel-package-tools": "^1.16"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "App\\LaravelModuleCreate\\Providers\\ModulesServiceProvider.php"
+            ]
+        }
     }
 }
