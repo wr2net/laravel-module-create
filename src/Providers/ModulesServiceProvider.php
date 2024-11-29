@@ -2,11 +2,11 @@
 
 namespace App\LaravelModuleCreate\Providers;
 
-use Spatie\LaravelPackageTools\Package;
-use Spatie\LaravelPackageTools\PackageServiceProvider;
+
 use App\LaravelModuleCreate\Console\Commands\GenerateProjectCommand;
 use App\LaravelModuleCreate\Console\Commands\GenerateModuleCommand;
 use App\LaravelModuleCreate\Console\Commands\GenerateScaffoldCommand;
+use Illuminate\Support\ServiceProvider;
 
 class ModulesServiceProvider extends PackageServiceProvider
 {

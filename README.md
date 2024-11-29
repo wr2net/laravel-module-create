@@ -1,6 +1,9 @@
+![Laravel Module Create](.github/cover.png)
+
 # Laravel Module Create
 
 Laravel Module Create is a complete module create for Laravel.
+-----
 
 ## # Using Artisan
 ### To create a project:
