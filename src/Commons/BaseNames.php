@@ -5,5 +5,5 @@ namespace App\LaravelModuleCreate\Commons;
 class BaseNames
 {
     const BASE_FOLDER = "app/";
-    const VERSION = "1.1.07";
+    const VERSION = "1.1.08";
 }
