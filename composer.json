@@ -1,6 +1,7 @@
 {
     "name": "wr2net/lm-create",
     "description": "LM Create is a complete module create for Laravel.",
+    "version": "1.1.07",
     "type": "library",
     "license": "MIT",
     "keywords": [
@@ -11,6 +12,7 @@
     ],
     "autoload": {
         "psr-4": {
+            "App\\": "app/",
             "App\\LaravelModuleCreate\\": "src/"
         }
     },
@@ -25,7 +27,8 @@
     "minimum-stability": "stable",
     "require": {
         "php": "^8.0",
-        "illuminate/support": "^11.34"
+        "illuminate/support": "^11.34",
+        "symfony/console": "^7.2"
     },
     "require-dev": {
         "spatie/laravel-package-tools": "^1.16"
@@ -36,5 +39,8 @@
                 "App\\LaravelModuleCreate\\Providers\\ModulesServiceProvider.php"
             ]
         }
+    },
+    "scripts": {
+        "lm-create": "./artisan lm-create"
     }
 }
