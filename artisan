@@ -1,0 +1,17 @@
+#!/usr/bin/env php
+<?php
+
+require_once __DIR__ . '/vendor/autoload.php';
+
+use App\LaravelModuleCreate\Commands\StartCreateCommand;
+use Symfony\Component\Console\Application;
+use App\LaravelModuleCreate\Commons\BaseNames;
+
+$app = new Application('CLI LM Create', BaseNames::VERSION);
+$app->add(new StartCreateCommand());
+
+try {
+    $app->run();
+} catch (Exception $e) {
+    echo "Command run with error: " . $e->getMessage() . PHP_EOL;
+}
