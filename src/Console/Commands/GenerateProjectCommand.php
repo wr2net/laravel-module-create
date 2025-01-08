@@ -1,11 +1,11 @@
 <?php
 
-namespace App\LaravelModuleCreate\Console\Commands;
+namespace Src\LaravelModuleCreate\Console\Commands;
 
 use Illuminate\Console\Command;
-use App\LaravelModuleCreate\Actions\StartCreate;
+use Src\LaravelModuleCreate\Actions\StartCreate;
 
-class GenerateScaffoldCommand extends Command
+class GenerateProjectCommand extends Command
 {
     public function __construct()
     {
@@ -17,14 +17,14 @@ class GenerateScaffoldCommand extends Command
      *
      * @var string
      */
-    protected string $signature = 'lm-create:skeleton {project} {module}';
+    protected string $signature = 'lm-create:project {project}';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected string $description = 'Generate Scaffold';
+    protected string $description = 'Generate Project';
 
 
     public function handle(): void
@@ -39,6 +39,6 @@ class GenerateScaffoldCommand extends Command
             }
             exit;
         }
-        echo "\033[31m No option provided. Use create:skeleton ProjectName ModuleName \n\033[0m";
+        echo "\033[31m No option provided. Use create:project 'Project Name' \n\033[0m";
     }
 }

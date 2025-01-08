@@ -3,9 +3,9 @@
 
 require_once __DIR__ . '/vendor/autoload.php';
 
-use App\LaravelModuleCreate\Commands\StartCreateCommand;
+use Src\LaravelModuleCreate\Commands\StartCreateCommand;
 use Symfony\Component\Console\Application;
-use App\LaravelModuleCreate\Commons\BaseNames;
+use Src\LaravelModuleCreate\Commons\BaseNames;
 
 $app = new Application('CLI LM Create', BaseNames::VERSION);
 $app->add(new StartCreateCommand());

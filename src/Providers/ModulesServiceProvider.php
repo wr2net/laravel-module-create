@@ -1,8 +1,8 @@
 <?php
 
-namespace App\LaravelModuleCreate\Providers;
+namespace Src\LaravelModuleCreate\Providers;
 
-use App\LaravelModuleCreate\Commands\StartCreateCommand;
+use LMC\LaravelModuleCreate\Commands\StartCreateCommand;
 use Illuminate\Support\ServiceProvider;
 
 class ModulesServiceProvider extends ServiceProvider

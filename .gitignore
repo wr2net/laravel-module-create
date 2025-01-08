@@ -5,7 +5,7 @@ yarn-error.log
 
 # Laravel 4 specific
 bootstrap/compiled.php
-app/storage/
+src/storage/
 
 # Laravel 5 & Lumen specific
 public/storage
@@ -22,3 +22,4 @@ Homestead.json
 /.vagrant
 .phpunit.result.cache
 .idea/
+app/
