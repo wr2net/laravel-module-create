@@ -1,7 +1,7 @@
 {
     "name": "wr2net/lm-create",
     "description": "LM Create is a complete module create for Laravel.",
-    "version": "1.1.08",
+    "version": "1.1.10",
     "type": "library",
     "license": "MIT",
     "keywords": [
