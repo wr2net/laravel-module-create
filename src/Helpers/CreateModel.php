@@ -1,6 +1,6 @@
 <?php
 
-namespace App\LaravelModuleCreate\Helpers;
+namespace Src\LaravelModuleCreate\Helpers;
 
 class CreateModel
 {

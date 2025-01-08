@@ -1,11 +1,11 @@
 <?php
 
-namespace App\LaravelModuleCreate\Actions;
+namespace Src\LaravelModuleCreate\Actions;
 
-use App\LaravelModuleCreate\Helpers\HandleHelpers;
-use App\LaravelModuleCreate\Templates\CreateProject;
-use App\LaravelModuleCreate\Templates\CreateModule;
-use App\LaravelModuleCreate\Templates\CreateScaffold;
+use Src\LaravelModuleCreate\Helpers\HandleHelpers;
+use Src\LaravelModuleCreate\Templates\CreateProject;
+use Src\LaravelModuleCreate\Templates\CreateModule;
+use Src\LaravelModuleCreate\Templates\CreateScaffold;
 
 class StartCreate
 {

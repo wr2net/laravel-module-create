@@ -1,12 +1,12 @@
 <?php
 
-namespace App\LaravelModuleCreate\Commands;
+namespace Src\LaravelModuleCreate\Commands;
 
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use App\LaravelModuleCreate\Actions\StartCreate;
+use Src\LaravelModuleCreate\Actions\StartCreate;
 
 class StartCreateCommand extends Command
 {
@@ -37,7 +37,7 @@ class StartCreateCommand extends Command
         $defineType = explode(':', $type);
         if (count($defineType) > 1) {
             StartCreate::create($defineType);
-            $output->writeln('<info>Executado com sucesso!</info>');
+            $output->writeln('<info>Success run!</info>');
         } else {
             $output->writeln('<error>Incorrect format. Use project:ProjectName or module:ProjectName:ModuleName</error>');
             return Command::INVALID;

@@ -1,9 +1,9 @@
 <?php
 
-namespace App\LaravelModuleCreate\Console\Commands;
+namespace Src\LaravelModuleCreate\Console\Commands;
 
 use Illuminate\Console\Command;
-use App\LaravelModuleCreate\Actions\StartCreate;
+use Src\LaravelModuleCreate\Actions\StartCreate;
 
 class GenerateModuleCommand extends Command
 {
