@@ -35,7 +35,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Src\\LaravelModuleCreate\\Providers\\ModulesServiceProvider.php"
+                "Src\\LaravelModuleCreate\\Providers\\ModulesServiceProvider"
             ]
         }
     },
