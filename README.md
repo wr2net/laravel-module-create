@@ -50,57 +50,33 @@ Remember that Laravel 10 and 11 have different places for declaring Providers.
 ## Commands
 
 ### To create a project:
-- Using Artisan
 ```bash
-php artisan lm-create project:MyProject
-```
-- Using Composer
-```bash
-composer lm-create project:MyProject
+php artisan lm-create:project MyProject
 ```
 
 ### To create a module:
-- Using Artisan
 ```bash
-php artisan lm-create module:MyProject:MyModule
-```
-- Using Composer
-```bash
-composer lm-create module:MyProject:MyModule
+php artisan lm-create:module MyProject MyModule
 ```
 
 ### To create a scaffold:
-- Using Artisan
 ```bash
-php artisan lm-create skeleton:MyProject:MyModule
-```
-- Using Composer
-```bash
-composer lm-create skeleton:MyProject:MyModule
+php artisan lm-create:skeleton MyProject MyModule
 ```
 
 ---
 
-### If you need compound names, use " ' " with space
+### If you need compound names, use quotes
 This is valid for Projects, Modules and Skeleton
 
 Eg. Project:
-- Using Artisan
 ```bash
-php artisan lm-create project:'My Project'
+php artisan lm-create:project 'My Project'
 ```
 Eg. Module or Skeleton:
 ```bash
-php artisan lm-create skeleton:'My Project':'My Module'
-```
-
-- Using Composer
-```bash
-composer lm-create project:'My Project'
-```
-Eg. Module or Skeleton:
-```bash
-composer lm-create skeleton:'My Project':'My Module'
+php artisan lm-create:module 'My Project' 'My Module'
+php artisan lm-create:skeleton 'My Project' 'My Module'
 ```
 
 ### TO DO List

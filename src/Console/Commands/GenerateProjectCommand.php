@@ -29,16 +29,11 @@ class GenerateProjectCommand extends Command
 
     public function handle(): void
     {
-        $options = getopt('f:');
-        if (isset($options['f'])) {
-            $type = $options['f'];
-            $defineType = explode(":", $type);
-
-            if (count($defineType) > 1) {
-                StartCreate::create($defineType);
-            }
-            exit;
+        $project = $this->argument('project');
+        if (!empty($project)) {
+            StartCreate::create(['project', $project]);
+            return;
         }
-        echo "\033[31m No option provided. Use create:project 'Project Name' \n\033[0m";
+        echo "\033[31m Invalid arguments. Use: php artisan lm-create:project 'Project Name' \n\033[0m";
     }
 }
