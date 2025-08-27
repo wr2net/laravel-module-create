@@ -2,8 +2,10 @@
 
 namespace Src\LaravelModuleCreate\Providers;
 
-use LMC\LaravelModuleCreate\Commands\StartCreateCommand;
 use Illuminate\Support\ServiceProvider;
+use Src\LaravelModuleCreate\Console\Commands\GenerateModuleCommand;
+use Src\LaravelModuleCreate\Console\Commands\GenerateProjectCommand;
+use Src\LaravelModuleCreate\Console\Commands\GenerateScaffoldCommand;
 
 class ModulesServiceProvider extends ServiceProvider
 {
@@ -13,14 +15,22 @@ class ModulesServiceProvider extends ServiceProvider
     public function boot(): void
     {
         if ($this->app->runningInConsole()) {
-            $this->commands(StartCreateCommand::class);
+            $this->commands([
+                GenerateProjectCommand::class,
+                GenerateModuleCommand::class,
+                GenerateScaffoldCommand::class,
+            ]);
         }
     }
 
     public function register(): void
     {
-        $this->commands([
-            StartCreateCommand::class,
-        ]);
+        if ($this->app->runningInConsole()) {
+            $this->commands([
+                GenerateProjectCommand::class,
+                GenerateModuleCommand::class,
+                GenerateScaffoldCommand::class,
+            ]);
+        }
     }
 }

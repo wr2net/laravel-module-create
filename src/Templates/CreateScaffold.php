@@ -36,9 +36,10 @@ class CreateScaffold extends BaseNames
     /**
      * @param string $projectName
      * @param string $moduleName
+     * @param string|null $type
      * @return void
      */
-    public function createScaffold(string $projectName, string $moduleName): void
+    public function createScaffold(string $projectName, string $moduleName, string $type = null): void
     {
         $projectName = $this->handleHelper->handleName($projectName);
         $moduleNameModule = $this->handleHelper->handleS(
@@ -60,12 +61,15 @@ class CreateScaffold extends BaseNames
                 $projectName
             );
 
-            $this->handleCreateController($path, $projectName, $moduleName);
+            if (is_null($type)) {
+                $this->handleCreateController($path, $projectName, $moduleName);
+                $this->handleCreateResource($path, $projectName, $moduleName);
+                $this->handleCreateRoute($path, $moduleName);
+            }
+
             $this->handleCreateModel($path, $projectName, $moduleName);
             $this->handleCreateProvider($path, $projectName, $moduleName);
             $this->handleCreateRequest($path, $projectName, $moduleName);
-            $this->handleCreateResource($path, $projectName, $moduleName);
-            $this->handleCreateRoute($path, $moduleName);
             $this->handleCreateService($path, $projectName, $moduleName);
         }
 

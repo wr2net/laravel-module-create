@@ -13,6 +13,7 @@ class StartCreate
     const PROJECT = 'project';
     const MODULE = 'module';
     const SCAFFOLD = 'skeleton';
+    const BASIC_SCAFFOLD = 'basic';
 
     /**
      * @param array $defineType
@@ -49,9 +50,10 @@ class StartCreate
                 echo self::DEFAULT_MESSAGE;
                 break;
             case self::SCAFFOLD:
+            case self::BASIC_SCAFFOLD:
                 if (isset($defineType[1]) && isset($defineType[2])) {
                     (new HandleHelpers)->beginOrEnd("S", 0, $defineType[2]);
-                    (new CreateScaffold)->createScaffold($defineType[1], $defineType[2]);
+                    (new CreateScaffold)->createScaffold($defineType[1], $defineType[2], $defineType[0]);
                     (new HandleHelpers)->beginOrEnd("S", 1, $defineType[2], $defineType[1], $defineType[2]);
                     break;
                 }
