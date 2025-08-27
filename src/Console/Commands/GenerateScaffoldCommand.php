@@ -29,16 +29,12 @@ class GenerateScaffoldCommand extends Command
 
     public function handle(): void
     {
-        $options = getopt('f:');
-        if (isset($options['f'])) {
-            $type = $options['f'];
-            $defineType = explode(":", $type);
-
-            if (count($defineType) > 1) {
-                StartCreate::create($defineType);
-            }
-            exit;
+        $project = $this->argument('project');
+        $module = $this->argument('module');
+        if (!empty($project) && !empty($module)) {
+            StartCreate::create(['skeleton', $project, $module]);
+            return;
         }
-        echo "\033[31m No option provided. Use create:skeleton ProjectName ModuleName \n\033[0m";
+        echo "\\033[31m Invalid arguments. Use: php artisan lm-create:skeleton ProjectName ModuleName \\n\\033[0m";
     }
 }
