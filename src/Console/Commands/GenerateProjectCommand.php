@@ -17,14 +17,14 @@ class GenerateProjectCommand extends Command
      *
      * @var string
      */
-    protected string $signature = 'lm-create:project {project}';
+    protected $signature = 'lm-create:project {project}';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected string $description = 'Generate Project';
+    protected $description = 'Generate Project';
 
 
     public function handle(): void

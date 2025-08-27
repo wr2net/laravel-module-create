@@ -17,14 +17,14 @@ class GenerateScaffoldCommand extends Command
      *
      * @var string
      */
-    protected string $signature = 'lm-create:skeleton {project} {module}';
+    protected $signature = 'lm-create:skeleton {project} {module}';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected string $description = 'Generate Scaffold';
+    protected $description = 'Generate Scaffold';
 
 
     public function handle(): void
