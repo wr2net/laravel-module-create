@@ -1,4 +1,4 @@
-![Laravel Module Create](.github/cover.png)
+![Laravel Module Create](https://github.com/wr2net/laravel-module-create/blob/master/.github/cover.png)
 
 # Laravel Module Create
 
