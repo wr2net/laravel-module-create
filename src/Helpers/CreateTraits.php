@@ -15,7 +15,7 @@ class CreateTraits
      */
     public function toTraitSoftDelete(string $projectName): string
     {
-        $namespace = "App\\" . $projectName . "\\Common\Traits";
+        $namespace = "App\\" . $projectName . "\\Commons\Traits";
         return <<<PHP
             <?php
             
@@ -49,7 +49,7 @@ class CreateTraits
         $routePath = '$this->routePath';
         $path = '$path';
         $toNamespace = '$this->namespace';
-        $namespace = "App\\" . $projectName . "\\Common\Traits";
+        $namespace = "App\\" . $projectName . "\\Commons\Traits";
         return <<<PHP
             <?php
             

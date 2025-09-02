@@ -65,7 +65,7 @@ class CreateProvider
         $modelName = strtolower($className);
         $namespace = "App\\" . $projectName . "\\" . $moduleName . "\\Providers";
         $controller = "App\\" . $projectName . "\\" . $moduleName . "\\Controllers";
-        $routeTrait = "App\\{$projectName}\\Common\\Traits\\RouteServiceProviderTrait";
+        $routeTrait = "App\\{$projectName}\\Commons\\Traits\\RouteServiceProviderTrait";
         $model = "App\\{$projectName}\\{$moduleName}\\Models\\{$className}";
 
         $toNamespace = '$namespace';

@@ -1,4 +1,4 @@
-![Laravel Module Create](https://github.com/wr2net/laravel-module-create/blob/master/.github/cover.png)
+![Laravel Module Create](.github/cover.png)
 
 # Laravel Module Create
 
@@ -17,7 +17,7 @@ Remember that Laravel 10 and 11 have different places for declaring Providers.
 
 ```text
 └── MyProject 
-    ├── Common
+    ├── Commons
         └── Traits
             ├── RouteServiceProviderTrait.php
             └── SoftDeletes.php

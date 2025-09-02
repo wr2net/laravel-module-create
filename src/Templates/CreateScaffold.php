@@ -20,7 +20,7 @@ class CreateScaffold extends BaseNames
     const RESOURCES = "Resources";
     const ROUTES = "Routes";
     const SERVICES = "Services";
-    const COMMON = "Common";
+    const COMMON = "Commons";
     const TRAITS = "Traits";
 
     /**
