@@ -1,4 +1,4 @@
-![Laravel Module Create](https://github.com/wr2net/laravel-module-create/blob/master/.github/cover.png)
+![Laravel Module Create](.github/cover.png)
 
 # Laravel Module Create
 
@@ -17,7 +17,7 @@ Remember that Laravel 10 and 11 have different places for declaring Providers.
 
 ```text
 └── MyProject 
-    ├── Common
+    ├── Commons
         └── Traits
             ├── RouteServiceProviderTrait.php
             └── SoftDeletes.php
@@ -62,6 +62,29 @@ php artisan lm-create:module MyProject MyModule
 ### To create a scaffold:
 ```bash
 php artisan lm-create:skeleton MyProject MyModule
+```
+
+### To create a basic scaffold:
+```bash
+php artisan lm-create:basic MyProject MyModule
+```
+
+#### This command creates the basic structure below
+```text
+└── MyProject 
+    ├── Commons
+        └── Traits
+            └── SoftDeletes.php
+    └── MyModules
+        ├── Models
+            ├── MyModule.php
+            └── Repositories
+                ├── MyModuleRepositoryInterface.php
+                └── MyModuleRepository.php
+        ├── Providers
+            └── AppServiceProvider.php
+        └── Services
+            └── MyModuleService.php
 ```
 
 ---

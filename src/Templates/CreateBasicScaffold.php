@@ -6,19 +6,15 @@ use Src\LaravelModuleCreate\Commons\BaseNames;
 use Src\LaravelModuleCreate\Helpers\HandleHelpers;
 
 /**
- * Class CreateScaffold
+ * Class CreateBasicScaffold
  * @package Src\LaravelModuleCreate\Templates
  * @extends BaseNames
  */
-class CreateScaffold extends BaseNames
+class CreateBasicScaffold extends BaseNames
 {
     const TRAIT = "Trait";
-    const CONTROLLER = "Controller";
     const MODELS = "Models";
     const PROVIDERS = "Providers";
-    const REQUESTS = "Requests";
-    const RESOURCES = "Resources";
-    const ROUTES = "Routes";
     const SERVICES = "Services";
     const COMMON = "Commons";
     const TRAITS = "Traits";
@@ -39,7 +35,7 @@ class CreateScaffold extends BaseNames
      * @param string|null $type
      * @return void
      */
-    public function createScaffold(string $projectName, string $moduleName, string $type = null): void
+    public function createBasicScaffold(string $projectName, string $moduleName, string $type = null): void
     {
         $projectName = $this->handleHelper->handleName($projectName);
         $moduleNameModule = $this->handleHelper->handleS(
@@ -56,20 +52,9 @@ class CreateScaffold extends BaseNames
                 parent::BASE_FOLDER . '/' . $projectName,
                 $projectName
             );
-            $this->handleCreateRouteServiceProviderTrait(
-                parent::BASE_FOLDER . '/' . $projectName,
-                $projectName
-            );
-
-            if (is_null($type)) {
-                $this->handleCreateController($path, $projectName, $moduleName);
-                $this->handleCreateResource($path, $projectName, $moduleName);
-                $this->handleCreateRoute($path, $moduleName);
-            }
 
             $this->handleCreateModel($path, $projectName, $moduleName);
             $this->handleCreateProvider($path, $projectName, $moduleName);
-            $this->handleCreateRequest($path, $projectName, $moduleName);
             $this->handleCreateService($path, $projectName, $moduleName);
         }
 
@@ -99,51 +84,6 @@ class CreateScaffold extends BaseNames
 
         $fullPath = $path . '/' . self::COMMON . '/' . self::TRAITS . '/' . $fileName;
         print_r($this->handleHelper->showMessage($fullPath, "SoftDelete", self::TRAIT));
-    }
-
-    /**
-     * @param string $path
-     * @param string $projectName
-     * @return void
-     */
-    private function handleCreateRouteServiceProviderTrait(string $path, string $projectName): void
-    {
-        $fileName = "RouteServiceProviderTrait.php";
-        file_put_contents(
-            $path . '/' . self::COMMON . '/' . self::TRAITS . '/' . $fileName,
-            $this->handleHelper->createRouteProviderTrait($projectName)
-        );
-
-        $fullPath = $path . '/' . self::COMMON . '/' . self::TRAITS . '/' . $fileName;
-        print_r($this->handleHelper->showMessage(
-            $fullPath,
-            "RouteServiceProviderTrait",
-            self::TRAIT
-        ));
-    }
-
-    /**
-     * @param string $path
-     * @param string $projectName
-     * @param string $moduleName
-     * @return void
-     */
-    private function handleCreateController(string $path, string $projectName, string $moduleName): void
-    {
-        $folderName = 'Controllers';
-        $subFolderName = 'Api';
-        $className = "{$this->handleHelper->handleName($moduleName)}";
-        $moduleName = $this->handleHelper->handleS($moduleName);
-        $fileName = "{$className}Controller.php";
-
-        $this->createFolder($path, $folderName, $subFolderName);
-        file_put_contents(
-            $path . '/' . $folderName . '/' . $subFolderName . '/' . $fileName,
-            $this->handleHelper->createController($projectName, $moduleName, $className)
-        );
-
-        $fullPath = $path . '/' . $folderName . '/' . $subFolderName . '/' . $fileName;
-        print_r($this->handleHelper->showMessage($fullPath, $className, self::CONTROLLER));
     }
 
     /**
@@ -190,7 +130,6 @@ class CreateScaffold extends BaseNames
     {
         $folderName = 'Providers';
         $fileNameApp = "AppServiceProvider.php";
-        $fileNameRoute = "RouteServiceProvider.php";
 
         $this->createFolder($path, $folderName);
         file_put_contents(
@@ -199,92 +138,6 @@ class CreateScaffold extends BaseNames
         );
         $fullPath = $path . '/' . $folderName . '/' . $fileNameApp;
         print_r($this->handleHelper->showMessage($fullPath, $fileNameApp, self::PROVIDERS));
-
-        file_put_contents(
-            $path . '/' . $folderName . '/' . $fileNameRoute,
-            $this->handleHelper->createRouteServiceProvider($projectName, $moduleName)
-        );
-        $fullPath = $path . '/' . $folderName . '/' . $fileNameRoute;
-        print_r($this->handleHelper->showMessage($fullPath, $fileNameRoute, self::PROVIDERS));
-    }
-
-    /**
-     * @param string $path
-     * @param string $projectName
-     * @param string $moduleName
-     * @return void
-     */
-    private function handleCreateRequest(string $path, string $projectName, string $moduleName): void
-    {
-        $folderName = 'Requests';
-        $className = "{$this->handleHelper->handleName($moduleName)}";
-        $moduleName = $this->handleHelper->handleS($moduleName);
-        $fileName = "{$className}Request.php";
-
-        $this->createFolder($path, $folderName);
-        file_put_contents(
-            $path . '/' . $folderName . '/' . $fileName,
-            $this->handleHelper->createRequest($projectName, $moduleName, $className)
-        );
-
-        $fullPath = $path . '/' . $folderName . '/' . $fileName;
-        print_r($this->handleHelper->showMessage($fullPath, $className, self::REQUESTS));
-    }
-
-    /**
-     * @param string $path
-     * @param string $projectName
-     * @param string $moduleName
-     * @return void
-     */
-    private function handleCreateResource(string $path, string $projectName, string $moduleName): void
-    {
-        $folderName = 'Resources';
-        $className = $this->handleHelper->handleName($moduleName);
-        $moduleName = $this->handleHelper->handleS($moduleName);
-        $fileNameCollection = "{$className}Collection.php";
-        $fileNameResource = "{$className}Resource.php";
-
-        $this->createFolder($path, $folderName);
-        file_put_contents(
-            $path . '/' . $folderName . '/' . $fileNameCollection,
-            $this->handleHelper->createCollection($projectName, $moduleName, $className)
-        );
-        $fullPath = $path . '/' . $folderName . '/' . $fileNameCollection;
-        print_r($this->handleHelper->showMessage($fullPath, $className . "Collection", self::RESOURCES));
-
-        file_put_contents(
-            $path . '/' . $folderName . '/' . $fileNameResource,
-            $this->handleHelper->createResource($projectName, $moduleName, $className)
-        );
-        $fullPath = $path . '/' . $folderName . '/' . $fileNameResource;
-        print_r($this->handleHelper->showMessage($fullPath, $className . "Resource", self::RESOURCES));
-    }
-
-    /**
-     * @param string $path
-     * @param string $moduleName
-     * @return void
-     */
-    private function handleCreateRoute(string $path, string $moduleName): void
-    {
-        $folderName = 'Routes';
-        $className = "{$this->handleHelper->handleName($moduleName)}";
-
-        $this->createFolder($path, $folderName);
-        file_put_contents(
-            $path . '/' . $folderName . '/api.php',
-            $this->handleHelper->createRouteApi($moduleName, $className)
-        );
-        $fullPath = $path . '/' . $folderName . '/api.php';
-        print_r($this->handleHelper->showMessage($fullPath, "api.php", self::ROUTES));
-
-        file_put_contents(
-            $path . '/' . $folderName . '/web.php',
-            $this->handleHelper->createRouteWeb($moduleName, $className)
-        );
-        $fullPath = $path . '/' . $folderName . '/web.php';
-        print_r($this->handleHelper->showMessage($fullPath, "web.php", self::ROUTES));
     }
 
     /**

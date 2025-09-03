@@ -13,7 +13,7 @@ class CreateModel
     public function toModel(string $projectName, string $moduleName, string $className): string
     {
         $namespace = "App\\" . $projectName . "\\" . $moduleName . "\\Models";
-        $softDelete = "use App\\" . $projectName . "\\Common\\Traits\\SoftDeletes;";
+        $softDelete = "use App\\" . $projectName . "\\Commons\\Traits\\SoftDeletes;";
         return <<<PHP
             <?php
             
