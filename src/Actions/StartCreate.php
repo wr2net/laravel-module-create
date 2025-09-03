@@ -3,6 +3,7 @@
 namespace Src\LaravelModuleCreate\Actions;
 
 use Src\LaravelModuleCreate\Helpers\HandleHelpers;
+use Src\LaravelModuleCreate\Templates\CreateBasicScaffold;
 use Src\LaravelModuleCreate\Templates\CreateProject;
 use Src\LaravelModuleCreate\Templates\CreateModule;
 use Src\LaravelModuleCreate\Templates\CreateScaffold;
@@ -61,7 +62,7 @@ class StartCreate
             case self::BASIC_SCAFFOLD:
                 if (isset($defineType[1]) && isset($defineType[2])) {
                     (new HandleHelpers)->beginOrEnd("S", 0, $defineType[2]);
-                    (new CreateScaffold)->createScaffold($defineType[1], $defineType[2], $defineType[0]);
+                    (new CreateBasicScaffold)->createBasicScaffold($defineType[1], $defineType[2], $defineType[0]);
                     (new HandleHelpers)->beginOrEnd("S", 1, $defineType[2], $defineType[1], $defineType[2]);
                     break;
                 }

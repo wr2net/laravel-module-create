@@ -64,6 +64,29 @@ php artisan lm-create:module MyProject MyModule
 php artisan lm-create:skeleton MyProject MyModule
 ```
 
+### To create a basic scaffold:
+```bash
+php artisan lm-create:basic MyProject MyModule
+```
+
+#### This command creates the basic structure below
+```text
+└── MyProject 
+    ├── Commons
+        └── Traits
+            └── SoftDeletes.php
+    └── MyModules
+        ├── Models
+            ├── MyModule.php
+            └── Repositories
+                ├── MyModuleRepositoryInterface.php
+                └── MyModuleRepository.php
+        ├── Providers
+            └── AppServiceProvider.php
+        └── Services
+            └── MyModuleService.php
+```
+
 ---
 
 ### If you need compound names, use quotes
