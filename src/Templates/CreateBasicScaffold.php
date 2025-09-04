@@ -60,12 +60,12 @@ class CreateBasicScaffold extends BaseNames
 
         if (!file_exists(parent::BASE_FOLDER . '/' . $projectName)) {
             CreateProject::createProject($projectName);
-            self::createScaffold($projectName, $moduleName);
+            self::createBasicScaffold($projectName, $moduleName);
         }
 
         if (!file_exists($path)) {
             (new CreateModule())->createFullModule($projectName, $moduleName);
-            self::createScaffold($projectName, $moduleName);
+            self::createBasicScaffold($projectName, $moduleName);
         }
     }
 
