@@ -3,6 +3,7 @@
 namespace Src\LaravelModuleCreate\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Src\LaravelModuleCreate\Console\Commands\GenerateBasicScaffoldCommand;
 use Src\LaravelModuleCreate\Console\Commands\GenerateModuleCommand;
 use Src\LaravelModuleCreate\Console\Commands\GenerateProjectCommand;
 use Src\LaravelModuleCreate\Console\Commands\GenerateScaffoldCommand;
@@ -19,6 +20,7 @@ class ModulesServiceProvider extends ServiceProvider
                 GenerateProjectCommand::class,
                 GenerateModuleCommand::class,
                 GenerateScaffoldCommand::class,
+                GenerateBasicScaffoldCommand::class,
             ]);
         }
     }
@@ -30,6 +32,7 @@ class ModulesServiceProvider extends ServiceProvider
                 GenerateProjectCommand::class,
                 GenerateModuleCommand::class,
                 GenerateScaffoldCommand::class,
+                GenerateBasicScaffoldCommand::class,
             ]);
         }
     }
