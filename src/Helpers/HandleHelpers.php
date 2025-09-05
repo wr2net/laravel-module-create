@@ -13,6 +13,7 @@ class HandleHelpers extends BaseNames
     const PROJECT = "P";
     const MODULE = "M";
     const SCAFFOLD = "S";
+    const BASIC = "B";
     const YELLOW = "\033[33m";
     const CYAN = "\033[36m";
     const GREEN = "\033[32m";
@@ -226,6 +227,22 @@ class HandleHelpers extends BaseNames
                         self::NC;
                 }
 
+                echo self::YELLOW .
+                    "{$inStage[$stage]} Configuration your Module Resource: {$this->handleName($toShow)}\n" .
+                    self::NC;
+                break;
+            case self::BASIC:
+                if ($stage == 1) {
+                    echo "\n # For Laravel versions below 11";
+                    echo self::CYAN .
+                        "\n # Register your new Module Resource in config/app.php on key 'providers'\n" .
+                        self::NC;
+
+                    echo "\n # For Laravel versions above 11";
+                    echo self::CYAN .
+                        "\n # Register your new Module Resource in bootstrap/providers.php '\n" .
+                        self::NC;
+                }
                 echo self::YELLOW .
                     "{$inStage[$stage]} Configuration your Module Resource: {$this->handleName($toShow)}\n" .
                     self::NC;
