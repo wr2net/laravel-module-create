@@ -108,4 +108,4 @@ php artisan lm-create:skeleton 'My Project' 'My Module'
 |-----------------------|------------------------------------------------------------------------------------------------|----------|
 | [v] No replace        | If module was created but, not is complete, in new generate cannot replace if exists resources | BUG      |
 | [v] Run in production | Not is running by artisan                                                                      | FEAT     |
-| [ ] Basic Skeleton  | Create basic skeleton to usage model                                                           | FEAT     |
+| [V] Basic Skeleton    | Create basic skeleton to usage model                                                           | FEAT     |
