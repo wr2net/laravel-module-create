@@ -104,8 +104,39 @@ php artisan lm-create:skeleton 'My Project' 'My Module'
 
 ### TO DO List
 
+| Resource                       | Description                                                                                    | Category |
+|--------------------------------|------------------------------------------------------------------------------------------------|----------|
+| [v] Run in production          | Not is running by artisan                                                                      | FEAT     |
+| [V] Basic Skeleton             | Create basic skeleton to usage model                                                           | FEAT     |
+| [ ] Generate Migrations        | Generate a command to create a migration for the created module and output it along with the information for logging.                                                           | FEAT     |
+| [ ] Generate Unit Tests        | Generate a basic structure for unit testing the module.                                                           | FEAT     |
+| [ ] Generate Integration Tests | Generate a basic structure for integration testing the module.                                                           | FEAT     |
+
+
+### FIX BUGS
+
 | Resource              | Description                                                                                    | Category |
 |-----------------------|------------------------------------------------------------------------------------------------|----------|
 | [v] No replace        | If module was created but, not is complete, in new generate cannot replace if exists resources | BUG      |
-| [v] Run in production | Not is running by artisan                                                                      | FEAT     |
-| [ ] Basic Skeleton  | Create basic skeleton to usage model                                                           | FEAT     |
+| [v] Namespace         | Modules with compound names are not generating namespaces correctly                            | BUG      |
+
+
+## For Developers
+
+```shell
+composer install
+```
+
+### Commands:
+```shell
+php src/Config/lm-create-dev.php -f project:MyProject
+```
+```shell
+php src/Config/lm-create-dev.php -f module:MyProject:MyModule
+```
+```shell
+php src/Config/lm-create-dev.php -f skeleton:MyProject:MyModule
+```
+```shell
+php src/Config/lm-create-dev.php -f basic:MyProject:MyModule
+```

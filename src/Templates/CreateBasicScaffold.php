@@ -97,7 +97,9 @@ class CreateBasicScaffold extends BaseNames
         $folderName = 'Models';
         $subFolderName = 'Repositories';
         $className = $this->handleHelper->handleName($moduleName);
-        $moduleName = $this->handleHelper->handleS($moduleName);
+        $moduleName = $this->handleHelper->handleS(
+            $this->handleHelper->handleName($moduleName)
+        );
         $fileName = "{$className}.php";
         $fileNameRepository = "{$className}Repository.php";
         $fileNameRepositoryInterface = "{$className}RepositoryInterface.php";
@@ -150,7 +152,9 @@ class CreateBasicScaffold extends BaseNames
     {
         $folderName = 'Services';
         $className = $this->handleHelper->handleName($moduleName);
-        $moduleName = $this->handleHelper->handleS($moduleName);
+        $moduleName = $this->handleHelper->handleS(
+            $this->handleHelper->handleName($moduleName)
+        );
         $fileName = "{$className}Service.php";
 
         $this->createFolder($path, $folderName);

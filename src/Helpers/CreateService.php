@@ -17,8 +17,8 @@ class CreateService
         $namespace = $base . "Services";
         $model = "use " . $base . "Models\\" . $className . ";";
         $repository = "use " . $base . "Models\\Repositories\\" . $className . "RepositoryInterface as " . $resource . "Repository;";
-        $repositoryProperty = '$' . strtolower($resource) .'Repository';
-        $setProperty = '$this->' . strtolower($resource) .'Repository';
+        $repositoryProperty = '$' . lcfirst($resource) .'Repository';
+        $setProperty = '$this->' . lcfirst($resource) .'Repository';
 
         return <<<PHP
             <?php

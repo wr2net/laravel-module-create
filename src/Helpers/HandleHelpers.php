@@ -447,4 +447,18 @@ class HandleHelpers extends BaseNames
         mkdir($path);
         chown($path, exec('whoami'));
     }
+
+    /**
+     * @param string $name
+     * @return string
+     */
+    public function handleRouteName(string $name): string
+    {
+        $name = strtolower($name);
+        $aux = str_replace(' ', '-', $name);
+        if ($name !== $aux) {
+            return str_replace(' ', '-', $name);
+        }
+        return $name;
+    }
 }
