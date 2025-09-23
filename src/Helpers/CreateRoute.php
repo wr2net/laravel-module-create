@@ -11,7 +11,7 @@ class CreateRoute
      */
     public function toApi(string $moduleName, string $className): string
     {
-        $routeName = strtolower($moduleName);
+        $routeName = (new HandleHelpers)->handleRouteName($moduleName);
         $valueName = '{' . strtolower($className) . '}';
         $controller = "{$className}Controller";
         return <<<PHP

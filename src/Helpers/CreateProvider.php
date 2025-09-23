@@ -12,7 +12,9 @@ class CreateProvider
     public function createAppServiceProvider(string $projectName, string $moduleName): string
     {
         $className = (new HandleHelpers)->handleName($moduleName);
-        $moduleName = (new HandleHelpers)->handleS($moduleName);
+        $moduleName = (new HandleHelpers)->handleS(
+            (new HandleHelpers)->handleName($moduleName)
+        );
         $namespace = "App\\" . $projectName . "\\" . $moduleName . "\\Providers";
         $setRepositoryInterface = "App\\" . $projectName . "\\" . $moduleName . "\\Models\\Repositories\\" . $className . "RepositoryInterface";
         $setRepository = "App\\" . $projectName . "\\" . $moduleName . "\\Models\\Repositories\\" . $className . "Repository";
@@ -61,7 +63,9 @@ class CreateProvider
     public function createRouteServiceProvider(string $projectName, string $moduleName): string
     {
         $className = (new HandleHelpers)->handleName($moduleName);
-        $moduleName = (new HandleHelpers)->handleS($moduleName);
+        $moduleName = (new HandleHelpers)->handleS(
+            (new HandleHelpers)->handleName($moduleName)
+        );
         $modelName = strtolower($className);
         $namespace = "App\\" . $projectName . "\\" . $moduleName . "\\Providers";
         $controller = "App\\" . $projectName . "\\" . $moduleName . "\\Controllers";
