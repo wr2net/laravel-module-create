@@ -1,5 +1,5 @@
 <div align="center">
-   <img src="https://github.com/wr2net/laravel-module-create/blob/v1.1.26/github/cover.png" alt="Laravel Module Create"/>
+   <img src="https://raw.githubusercontent.com/wr2net/laravel-module-create/refs/tags/v1.1.26/github/cover.png" alt="Laravel Module Create"/>
 
 # Laravel Module Create
 
