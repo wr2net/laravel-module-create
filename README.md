@@ -1,17 +1,22 @@
-<div style="align-content: center; align-items: center; text-align: center;">
-   <img src=".github/cover.png" alt="Laravel Module Create"/>
+<div align="center">
+   <img src="github/cover.png" alt="Laravel Module Create"/>
 
 # Laravel Module Create
 
 ![LM-CREATE](https://img.shields.io/badge/Laravel%20Module%20Create-grey?style=for-the-badge&logo=laravel)
 
-![Packagist Downloads](https://img.shields.io/packagist/dt/wr2net/lm-create)
-![GitHub Release](https://img.shields.io/github/v/release/wr2net/laravel-module-create)
+[![Packagist Downloads](https://img.shields.io/packagist/dt/wr2net/lm-create)](https://packagist.org/packages/wr2net/lm-create)
+[![GitHub Release](https://img.shields.io/github/v/release/wr2net/laravel-module-create)](https://packagist.org/packages/wr2net/lm-create)
+[![GitHub License](https://img.shields.io/github/license/wr2net/laravel-module-create)](https://github.com/wr2net/laravel-module-create/blob/master/LICENSE)
+[![PHP Version](https://img.shields.io/packagist/php-v/grazulex/laravel-draftable.svg?style=flat-square)](https://php.net/)
+[![Laravel Version](https://img.shields.io/badge/laravel-10.x-ff2d20?style=flat-square&logo=laravel)](https://laravel.com/docs/10.x)
+[![Laravel Version](https://img.shields.io/badge/laravel-11.x-ff2d20?style=flat-square&logo=laravel)](https://laravel.com/docs/11.x)
+[![Laravel Version](https://img.shields.io/badge/laravel-12.x-ff2d20?style=flat-square&logo=laravel)](https://laravel.com/docs/12.x)
 
 </div>
 
 
-Laravel Module Create is a complete module create for Laravel.
+🚀 Laravel Module Create is a complete module create for Laravel.
 -----
 
 To create the suggested structures, the execution options are shown below. To create a "Project", it will be created within the default "app" directory with the name of your project where all the modules will be located.
@@ -56,7 +61,15 @@ Remember that Laravel 10 and 11 have different places for declaring Providers.
 
 -----
 
-## Commands
+## � Installation
+
+Install the package via Composer:
+
+```bash
+composer require --dev wr2net/lm-create
+```
+
+## 📚 Commands
 
 ### To create a project:
 ```bash
@@ -111,7 +124,11 @@ php artisan lm-create:module 'My Project' 'My Module'
 php artisan lm-create:skeleton 'My Project' 'My Module'
 ```
 
-### TO DO List
+## 📄 License
+
+The MIT License (MIT). Please see [License File](LICENSE) for more information.
+
+## 📝 TO DO List
 
 | Resource                       | Description                                                                                    | Category |
 |--------------------------------|------------------------------------------------------------------------------------------------|----------|
@@ -130,7 +147,7 @@ php artisan lm-create:skeleton 'My Project' 'My Module'
 | [v] Namespace         | Modules with compound names are not generating namespaces correctly                            | BUG      |
 
 
-## For Developers
+## 🔧 For Developers
 
 ```shell
 composer install
