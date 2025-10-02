@@ -1,6 +1,15 @@
-![Laravel Module Create](.github/cover.png)
+<div style="align-content: center; align-items: center; text-align: center;">
+   <img src=".github/cover.png" alt="Laravel Module Create"/>
 
 # Laravel Module Create
+
+![LM-CREATE](https://img.shields.io/badge/Laravel%20Module%20Create-grey?style=for-the-badge&logo=laravel)
+
+![Packagist Downloads](https://img.shields.io/packagist/dt/wr2net/lm-create)
+![GitHub Release](https://img.shields.io/github/v/release/wr2net/laravel-module-create)
+
+</div>
+
 
 Laravel Module Create is a complete module create for Laravel.
 -----
