@@ -1,7 +1,7 @@
 {
     "name": "wr2net/lm-create",
     "description": "To create the suggested structures, the execution options are shown below. To create a \"Project\", it will be created within the default \"app\" directory with the name of your project where all the modules will be located.\n\nTo create the modules or the complete skeleton of the module, you must also inform your project, as shown in each command.",
-    "version": "1.1.25",
+    "version": "1.1.26",
     "type": "library",
     "license": "MIT",
     "keywords": [
