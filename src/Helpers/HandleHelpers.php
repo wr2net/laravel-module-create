@@ -92,6 +92,16 @@ class HandleHelpers extends BaseNames
      */
     private CreateService $forCreateService;
 
+    /**
+     * @var CreateUnitTest
+     */
+    private CreateUnitTest $forCreateUnitTest;
+
+    /**
+     * @var CreateFeatureTest
+     */
+    private CreateFeatureTest $forCreateFeatureTest;
+
     public function __construct()
     {
         $this->forCreateController = new CreateController();
@@ -102,6 +112,8 @@ class HandleHelpers extends BaseNames
         $this->forCreateResource = new CreateResource();
         $this->forCreateRoute = new CreateRoute();
         $this->forCreateService = new CreateService();
+        $this->forCreateUnitTest = new CreateUnitTest();
+        $this->forCreateFeatureTest = new CreateFeatureTest();
     }
 
     /**
@@ -418,6 +430,28 @@ class HandleHelpers extends BaseNames
 
     /**
      * @param string $projectName
+     * @param string $moduleName
+     * @param string $className
+     * @return string
+     */
+    public function createUnitTests(string $projectName, string $moduleName, string $className): string
+    {
+        return $this->forCreateUnitTest->toUnitTest($projectName, $moduleName, $className);
+    }
+
+    /**
+     * @param string $projectName
+     * @param string $moduleName
+     * @param string $className
+     * @return string
+     */
+    public function createFeatureTests(string $projectName, string $moduleName, string $className): string
+    {
+        return $this->forCreateFeatureTest->toFeatureTest($projectName, $moduleName, $className);
+    }
+
+    /**
+     * @param string $projectName
      * @param string|null $moduleName
      * @return bool
      */
@@ -460,5 +494,14 @@ class HandleHelpers extends BaseNames
             return str_replace(' ', '-', $name);
         }
         return $name;
+    }
+
+    /**
+     * @param string $message
+     * @return string
+     */
+    public function show(string $message): string
+    {
+        return self::CYAN . $message . self::NC;
     }
 }

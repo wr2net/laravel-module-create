@@ -22,6 +22,8 @@ class CreateScaffold extends BaseNames
     const SERVICES = "Services";
     const COMMON = "Commons";
     const TRAITS = "Traits";
+    const UNIT = "UnitTest";
+    const FEATURE = "FeatureTest";
 
     /**
      * @var HandleHelpers
@@ -71,6 +73,20 @@ class CreateScaffold extends BaseNames
             $this->handleCreateProvider($path, $projectName, $moduleName);
             $this->handleCreateRequest($path, $projectName, $moduleName);
             $this->handleCreateService($path, $projectName, $moduleName);
+
+            print_r($this->handleHelper->show("Do create Unit Tests? (Y/n)\n"));
+            $confirmation = trim(fgets(STDIN));
+
+            if (strtolower($confirmation) === 'y' || empty($confirmation)) {
+                $this->handleCreateUnitTests(self::UNIT_FOLDER, $projectName, $moduleName);
+            }
+
+            print_r($this->handleHelper->show("Do create Feature Tests? (Y/n)\n"));
+            $confirmation = trim(fgets(STDIN));
+
+            if (strtolower($confirmation) === 'y' || empty($confirmation)) {
+                $this->handleCreateFeatureTests(self::FEATURE_FOLDER, $projectName, $moduleName);
+            }
         }
 
         if (!file_exists(parent::BASE_FOLDER . '/' . $projectName)) {
@@ -346,5 +362,43 @@ class CreateScaffold extends BaseNames
                 $this->handleHelper->createDirectory($path . '/' . $folderName . '/' . $subFolderName);
             }
         }
+    }
+
+    /**
+     * @param string $path
+     * @param string $projectName
+     * @param string $moduleName
+     * @return void
+     */
+    private function handleCreateUnitTests(string $path, string $projectName, string $moduleName): void
+    {
+        $className = $this->handleHelper->handleName($moduleName);
+        $moduleName = $this->handleHelper->handleS(
+            $this->handleHelper->handleName($moduleName)
+        );
+        $fileName = "{$className}UnitTest.php";
+
+        file_put_contents(
+            $path . '/' . $fileName,
+            $this->handleHelper->createUnitTests($projectName, $moduleName, $className)
+        );
+        $fullPath = $path . '/' . $fileName;
+        print_r($this->handleHelper->showMessage($fullPath, $className, self::UNIT));
+    }
+
+    private function handleCreateFeatureTests(string $path, string $projectName, string $moduleName)
+    {
+        $className = $this->handleHelper->handleName($moduleName);
+        $moduleName = $this->handleHelper->handleS(
+            $this->handleHelper->handleName($moduleName)
+        );
+        $fileName = "{$className}FeatureTest.php";
+
+        file_put_contents(
+            $path . '/' . $fileName,
+            $this->handleHelper->createFeatureTests($projectName, $moduleName, $className)
+        );
+        $fullPath = $path . '/' . $fileName;
+        print_r($this->handleHelper->showMessage($fullPath, $className, self::FEATURE));
     }
 }

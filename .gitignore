@@ -23,4 +23,5 @@ Homestead.json
 .phpunit.result.cache
 .idea/
 app/
+tests/
 composer.lock
