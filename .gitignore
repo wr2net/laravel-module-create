@@ -25,3 +25,4 @@ Homestead.json
 app/
 tests/
 composer.lock
+database/

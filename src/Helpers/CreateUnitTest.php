@@ -2,16 +2,21 @@
 
 namespace Src\LaravelModuleCreate\Helpers;
 
+use Faker\Factory;
+
 class CreateUnitTest
 {
     /**
      * @param string $projectName
      * @param string $moduleName
+     * 32
      * @param string $className
+     * @param array $fields
      * @return string
      */
-    public function toUnitTest(string $projectName, string $moduleName, string $className): string
-    {
+    public function toUnitTest(
+        string $projectName, string $moduleName, string $className, array $fields = []
+    ): string {
         $resource = $className;
         $testNameModule = strtolower($moduleName);
         $base = "\\App\\" . $projectName . "\\" . $moduleName . "\\";
@@ -22,6 +27,8 @@ class CreateUnitTest
 
         $controllerPath = "{$base}Controllers\\Api\\{$resource}Controller";
         $requestPath = "{$base}Requests\\{$resource}Request";
+
+        $fields = $this->handleFieldsFake($fields);
 
         return <<<PHP
             <?php
@@ -40,11 +47,11 @@ class CreateUnitTest
                     \${$testNameModule}Mock = \$this->mock({$resource}::class);
                     \${$testNameModule}Mock->shouldReceive('create')
                         ->once()
-                        ->with(['name' => ''])
+                        ->with({$fields})
                         ->andReturn(new {$className}(['id' => 1]));
                     
                     \$controller = new {$controllerPath}(\${$testNameModule}Mock);
-                    \$request = new {$requestPath}(['name' => '']);
+                    \$request = new {$requestPath}({$fields});
                     \$response = \$controller->store(\$request);
                     
                     \$this->assertInstanceOf(\Illuminate\Http\JsonResponse::class, \$response);   
@@ -60,10 +67,10 @@ class CreateUnitTest
                         
                     \${$testNameModule}Mock->shouldReceive('update')
                         ->once()
-                        ->with(['name' => '']);
+                        ->with({$fields});
                         
                     \$controller = new {$controllerPath}(\${$testNameModule}Mock);
-                    \$request = new {$requestPath}(['name' => '']);
+                    \$request = new {$requestPath}({$fields});
                     \$response = \$controller->update(\$request, 1);
                     
                     \$this->assertInstanceOf(\Illuminate\Http\JsonResponse::class, \$response);
@@ -153,5 +160,26 @@ class CreateUnitTest
                 }
             }
             PHP;
+    }
+
+    /**
+     * @param array $fields
+     * @return string
+     */
+    private function handleFieldsFake(array $fields): string
+    {
+        $fieldsAllocate = [];
+        $faker = Factory::create();
+        for ($i = 0; $i < count($fields); $i++) {
+            $value = match ($fields[$i]) {
+                'password' => "{$faker->password()}",
+                'name' => "{$faker->words(2)}",
+                'email' => "{$faker->words(1)}@example.com",
+                'value','price' => $faker->randomFloat(),
+                default => "{$faker->text()}",
+            };
+            $fieldsAllocate[] = "'{$fields[$i]}' => {$value},";
+        }
+        return print_r($fieldsAllocate, true);
     }
 }

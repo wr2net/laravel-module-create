@@ -432,11 +432,13 @@ class HandleHelpers extends BaseNames
      * @param string $projectName
      * @param string $moduleName
      * @param string $className
+     * @param array $fields
      * @return string
      */
-    public function createUnitTests(string $projectName, string $moduleName, string $className): string
-    {
-        return $this->forCreateUnitTest->toUnitTest($projectName, $moduleName, $className);
+    public function createUnitTests(
+        string $projectName, string $moduleName, string $className, array $fields = []
+    ): string {
+        return $this->forCreateUnitTest->toUnitTest($projectName, $moduleName, $className, $fields);
     }
 
     /**
