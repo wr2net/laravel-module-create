@@ -3,6 +3,7 @@
 namespace Src\LaravelModuleCreate\Templates;
 
 use Src\LaravelModuleCreate\Commons\BaseNames;
+use Src\LaravelModuleCreate\Commons\Complements;
 use Src\LaravelModuleCreate\Helpers\HandleHelpers;
 
 /**
@@ -12,16 +13,10 @@ use Src\LaravelModuleCreate\Helpers\HandleHelpers;
  */
 class CreateScaffold extends BaseNames
 {
-    const TRAIT = "Trait";
-    const CONTROLLER = "Controller";
-    const MODELS = "Models";
-    const PROVIDERS = "Providers";
-    const REQUESTS = "Requests";
-    const RESOURCES = "Resources";
-    const ROUTES = "Routes";
-    const SERVICES = "Services";
-    const COMMON = "Commons";
-    const TRAITS = "Traits";
+    /**
+     * @var string
+     */
+    public string $controllerName;
 
     /**
      * @var HandleHelpers
@@ -71,6 +66,10 @@ class CreateScaffold extends BaseNames
             $this->handleCreateProvider($path, $projectName, $moduleName);
             $this->handleCreateRequest($path, $projectName, $moduleName);
             $this->handleCreateService($path, $projectName, $moduleName);
+
+            (new Complements($this->handleHelper))->handleComplements(
+                $projectName, $moduleName, $this->controllerName
+            );
         }
 
         if (!file_exists(parent::BASE_FOLDER . '/' . $projectName)) {
@@ -137,7 +136,7 @@ class CreateScaffold extends BaseNames
             $this->handleHelper->handleName($moduleName)
         );
         $fileName = "{$className}Controller.php";
-
+        $this->controllerName = "{$className}Controller";
         $this->createFolder($path, $folderName, $subFolderName);
         file_put_contents(
             $path . '/' . $folderName . '/' . $subFolderName . '/' . $fileName,

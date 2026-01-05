@@ -2,6 +2,7 @@
 
 namespace Src\LaravelModuleCreate\Helpers;
 
+use Faker\Factory;
 use Src\LaravelModuleCreate\Commons\BaseNames;
 
 /**
@@ -92,6 +93,26 @@ class HandleHelpers extends BaseNames
      */
     private CreateService $forCreateService;
 
+    /**
+     * @var CreateUnitTest
+     */
+    private CreateUnitTest $forCreateUnitTest;
+
+    /**
+     * @var CreateFeatureTest
+     */
+    private CreateFeatureTest $forCreateFeatureTest;
+
+    /**
+     * @var CreateMigration
+     */
+    private CreateMigration $forCreateMigration;
+
+    /**
+     * @var CreateReadme
+     */
+    private CreateReadme $forCreateReadme;
+
     public function __construct()
     {
         $this->forCreateController = new CreateController();
@@ -102,6 +123,10 @@ class HandleHelpers extends BaseNames
         $this->forCreateResource = new CreateResource();
         $this->forCreateRoute = new CreateRoute();
         $this->forCreateService = new CreateService();
+        $this->forCreateUnitTest = new CreateUnitTest();
+        $this->forCreateFeatureTest = new CreateFeatureTest();
+        $this->forCreateMigration = new CreateMigration();
+        $this->forCreateReadme = new CreateReadme();
     }
 
     /**
@@ -418,6 +443,78 @@ class HandleHelpers extends BaseNames
 
     /**
      * @param string $projectName
+     * @param string $moduleName
+     * @param string $className
+     * @param array $fields
+     * @param int $size
+     * @return string
+     */
+    public function createUnitTests(
+        string $projectName, string $moduleName, string $className, array $fields, int $size = 3
+    ): string {
+        return $this->forCreateUnitTest->toUnitTest($projectName, $moduleName, $className, $fields, $size);
+    }
+
+    /**
+     * @param string $projectName
+     * @param string $moduleName
+     * @param string $className
+     * @param array $fields
+     * @param int $size
+     * @return string
+     */
+    public function createFeatureTests(
+        string $projectName, string $moduleName, string $className, array $fields, int $size
+    ): string {
+        return $this->forCreateFeatureTest->toFeatureTest($projectName, $moduleName, $className, $fields, $size);
+    }
+
+    /**
+     * @param string $className
+     * @param array $fields
+     * @return string
+     */
+    public function createMigration(
+        string $className, array $fields
+    ): string {
+        return $this->forCreateMigration->toMigration($className, $fields);
+    }
+
+    /**
+     * @param string $project
+     * @param string $module
+     * @param string $controller
+     * @param array $fields
+     * @param array $routers
+     * @param string $unitTest
+     * @param string $featureTest
+     * @param string $migration
+     * @return string
+     */
+    public function createReadme(
+        string $project,
+        string $module,
+        string $controller,
+        array $fields,
+        array $routers,
+        string $unitTest,
+        string $featureTest,
+        string $migration,
+    ): string {
+        return $this->forCreateReadme->createReadme(
+            $project,
+            $module,
+            $controller,
+            $fields,
+            $routers,
+            $unitTest,
+            $featureTest,
+            $migration,
+        );
+    }
+
+    /**
+     * @param string $projectName
      * @param string|null $moduleName
      * @return bool
      */
@@ -460,5 +557,71 @@ class HandleHelpers extends BaseNames
             return str_replace(' ', '-', $name);
         }
         return $name;
+    }
+
+    /**
+     * @param string $message
+     * @return string
+     */
+    public function show(string $message): string
+    {
+        return self::CYAN . $message . self::NC;
+    }
+
+    /**
+     * Indent a string by a given number of spaces.
+     */
+    public function indent(string $string, int $spaces = 4): string
+    {
+        $indentation = str_repeat(' ', $spaces);
+        return $indentation . str_replace("\n", "\n" . $indentation, $string);
+    }
+
+    /**
+     * @param array $fields
+     * @return string
+     */
+    public function iterateFields(array $fields): string
+    {
+        $fieldsAllocate = "";
+        $faker = Factory::create();
+        for ($i = 0; $i < count($fields); $i++) {
+            $field = ltrim(rtrim($fields[$i]));
+            $value = match ($field) {
+                'password' => "'" . str_replace("'", "", $faker->password()) . "'",
+                'name' => "'" . str_replace("'", "", $faker->name()) . "'",
+                'email' => "'" . str_replace("'", "", $faker->email()) . "'",
+                'value', 'price' => $faker->randomFloat(),
+                default => "'" . str_replace("'", "", $faker->text(50)) . "'",
+            };
+
+            if ($i > 0) {
+                $fieldsAllocate .= "\n";
+            }
+
+            $fieldsAllocate .= "'{$field}' => {$value},";
+        }
+
+        return rtrim($fieldsAllocate);
+    }
+
+    /**
+     * @param string $moduleName
+     * @param string $controller
+     * @return array
+     */
+    public function getRoutes(string $moduleName, string $controller): array
+    {
+        $name = $moduleName . "Id";
+        $moduleName = (new HandleHelpers())->handleS($moduleName);
+        return [
+            ['GET', "api/{$moduleName}", "{$moduleName}.index", "{$controller}@index"],
+            ['POST', "api/{$moduleName}", "{$moduleName}.store", "{$controller}@store"],
+            ['GET', "api/{$moduleName}/{{$name}}", "{$moduleName}.show", "{$controller}@show"],
+            ['PUT', "api/{$moduleName}/{{$name}}", "{$moduleName}.update", "{$controller}@update"],
+            ['PATCH', "api/{$moduleName}/{{$name}}/disable", "{$moduleName}.disable", "{$controller}@disable"],
+            ['PATCH', "api/{$moduleName}/{{$name}}/enable", "{$moduleName}.enable", "{$controller}@enable"],
+            ['DELETE', "api/{$moduleName}/{{$name}}", "{$moduleName}.delete", "{$controller}@delete"],
+        ];
     }
 }

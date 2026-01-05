@@ -1,8 +1,4 @@
-<div align="center">
-   <img src="https://raw.githubusercontent.com/wr2net/laravel-module-create/refs/tags/v1.1.26/github/cover.png" alt="Laravel Module Create"/>
-
 # Laravel Module Create
-
 ![LM-CREATE](https://img.shields.io/badge/Laravel%20Module%20Create-grey?style=for-the-badge&logo=laravel)
 
 [![Packagist Downloads](https://img.shields.io/packagist/dt/wr2net/lm-create)](https://packagist.org/packages/wr2net/lm-create)
@@ -13,11 +9,11 @@
 [![Laravel Version](https://img.shields.io/badge/laravel-11.x-ff2d20?style=flat-square&logo=laravel)](https://laravel.com/docs/11.x)
 [![Laravel Version](https://img.shields.io/badge/laravel-12.x-ff2d20?style=flat-square&logo=laravel)](https://laravel.com/docs/12.x)
 
-</div>
-
 
 🚀 Laravel Module Create is a complete module create for Laravel.
 -----
+
+## [Read Details](DETAILS.md)
 
 To create the suggested structures, the execution options are shown below. To create a "Project", it will be created within the default "app" directory with the name of your project where all the modules will be located.
 
@@ -133,10 +129,9 @@ The MIT License (MIT). Please see [License File](LICENSE) for more information.
 | Resource                       | Description                                                                                    | Category |
 |--------------------------------|------------------------------------------------------------------------------------------------|----------|
 | [v] Run in production          | Not is running by artisan                                                                      | FEAT     |
-| [V] Basic Skeleton             | Create basic skeleton to usage model                                                           | FEAT     |
-| [ ] Generate Migrations        | Generate a command to create a migration for the created module and output it along with the information for logging.                                                           | FEAT     |
-| [ ] Generate Unit Tests        | Generate a basic structure for unit testing the module.                                                           | FEAT     |
-| [ ] Generate Integration Tests | Generate a basic structure for integration testing the module.                                                           | FEAT     |
+| [v] Basic Skeleton             | Create basic skeleton to usage model                                                           | FEAT     |
+| [v] Generate Unit Tests        | Generate a basic structure for unit testing the module.                                                           | FEAT     |
+| [v] Generate Integration Tests | Generate a basic structure for integration testing the module.                                                           | FEAT     |
 
 
 ### FIX BUGS

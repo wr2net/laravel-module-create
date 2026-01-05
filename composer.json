@@ -1,7 +1,7 @@
 {
     "name": "wr2net/lm-create",
     "description": "To create the suggested structures, the execution options are shown below. To create a \"Project\", it will be created within the default \"app\" directory with the name of your project where all the modules will be located.\n\nTo create the modules or the complete skeleton of the module, you must also inform your project, as shown in each command.",
-    "version": "1.1.28",
+    "version": "1.2.01",
     "type": "library",
     "license": "MIT",
     "keywords": [
@@ -26,11 +26,13 @@
     "minimum-stability": "stable",
     "require": {
         "php": "^8.0",
-        "illuminate/support": "^10.0 || ^11.0 || ^12.0"
+        "illuminate/support": "^10.0 || ^11.0 || ^12.0",
+        "fakerphp/faker": "^1.24"
     },
     "require-dev": {
         "spatie/laravel-package-tools": "^1.16",
-        "symfony/console": "^7.2"
+        "symfony/console": "^7.2",
+        "phpunit/phpunit": "^12.4"
     },
     "extra": {
         "laravel": {
@@ -40,6 +42,7 @@
         }
     },
     "scripts": {
-        "lm-create": "./artisan lm-create"
+      "lm-create": "./artisan lm-create",
+      "test": "vendor/bin/phpunit --testdox tests/"
     }
 }
