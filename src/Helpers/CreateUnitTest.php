@@ -2,24 +2,23 @@
 
 namespace Src\LaravelModuleCreate\Helpers;
 
-use Faker\Factory;
 
 class CreateUnitTest
 {
     /**
      * @param string $projectName
      * @param string $moduleName
-     * 32
      * @param string $className
      * @param array $fields
+     * @param int $sizeCollection
      * @return string
      */
     public function toUnitTest(
-        string $projectName, string $moduleName, string $className, array $fields = []
+        string $projectName, string $moduleName, string $className, array $fields, int $sizeCollection = 3
     ): string {
         $resource = $className;
         $testNameModule = strtolower($moduleName);
-        $base = "\\App\\" . $projectName . "\\" . $moduleName . "\\";
+        $base = "App\\" . $projectName . "\\" . $moduleName . "\\";
         $namespace = "Unit";
         $model = "use " . $base . "Models\\" . $className . ";";
         $testAttributes = "use PHPUnit\Framework\Attributes\Test;";
@@ -28,7 +27,13 @@ class CreateUnitTest
         $controllerPath = "{$base}Controllers\\Api\\{$resource}Controller";
         $requestPath = "{$base}Requests\\{$resource}Request";
 
-        $fields = $this->handleFieldsFake($fields);
+        $fieldsRows = $this->handleFieldsFakeWithId($fields, $sizeCollection);
+        $collection = rtrim($this->handleCollection($className, $fieldsRows, $sizeCollection));
+        $oneRowCollection = rtrim((new HandleHelpers())->indent(ltrim(rtrim($fieldsRows[0])), 8));
+        $fieldsRow = rtrim($this->handleFieldsFake($fields));
+        $end = (new HandleHelpers())->indent("\n]", 8);
+        $end = str_replace("\n", "", $end);
+        $fieldsRow = $fieldsRow . "\n" . $end;
 
         return <<<PHP
             <?php
@@ -47,11 +52,11 @@ class CreateUnitTest
                     \${$testNameModule}Mock = \$this->mock({$resource}::class);
                     \${$testNameModule}Mock->shouldReceive('create')
                         ->once()
-                        ->with({$fields})
+                        ->with({$fieldsRow})
                         ->andReturn(new {$className}(['id' => 1]));
                     
                     \$controller = new {$controllerPath}(\${$testNameModule}Mock);
-                    \$request = new {$requestPath}({$fields});
+                    \$request = new {$requestPath}({$fieldsRow});
                     \$response = \$controller->store(\$request);
                     
                     \$this->assertInstanceOf(\Illuminate\Http\JsonResponse::class, \$response);   
@@ -67,10 +72,10 @@ class CreateUnitTest
                         
                     \${$testNameModule}Mock->shouldReceive('update')
                         ->once()
-                        ->with({$fields});
+                        ->with({$fieldsRow});
                         
                     \$controller = new {$controllerPath}(\${$testNameModule}Mock);
-                    \$request = new {$requestPath}({$fields});
+                    \$request = new {$requestPath}({$fieldsRow});
                     \$response = \$controller->update(\$request, 1);
                     
                     \$this->assertInstanceOf(\Illuminate\Http\JsonResponse::class, \$response);
@@ -81,8 +86,7 @@ class CreateUnitTest
                 {
                     \${$testNameModule} = collect(
                         [
-                            new {$className}(['id' => 1, 'name' => 'John Doe']),
-                            new {$className}(['id' => 2, 'name' => 'John Doe']),
+            {$collection}
                         ]
                     );
                     
@@ -100,7 +104,7 @@ class CreateUnitTest
                 #[Test]
                 public function it_can_show_{$testNameModule}_unitarily()
                 {
-                    \${$testNameModule}s = new {$className}(['id' => 1, 'name' => 'John Doe']);
+                    \${$testNameModule}s = new {$className}({$oneRowCollection});
                     \${$testNameModule}Mock = \$this->mock({$resource}::class);
                     \${$testNameModule}Mock->shouldReceive('findOrFail')
                         ->with(1)
@@ -168,18 +172,48 @@ class CreateUnitTest
      */
     private function handleFieldsFake(array $fields): string
     {
-        $fieldsAllocate = [];
-        $faker = Factory::create();
-        for ($i = 0; $i < count($fields); $i++) {
-            $value = match ($fields[$i]) {
-                'password' => "{$faker->password()}",
-                'name' => "{$faker->words(2)}",
-                'email' => "{$faker->words(1)}@example.com",
-                'value','price' => $faker->randomFloat(),
-                default => "{$faker->text()}",
-            };
-            $fieldsAllocate[] = "'{$fields[$i]}' => {$value},";
+        $start = "[\n";
+        $fieldsAllocate = (new HandleHelpers())->indent(
+            (new HandleHelpers())->iterateFields($fields)
+            , 20
+        );
+        return $start . rtrim($fieldsAllocate);
+    }
+
+    /**
+     * @param array $fields
+     * @param int $size
+     * @return array
+     */
+    private function handleFieldsFakeWithId(array $fields, int $size = 1): array
+    {
+        $rows = [];
+        for ($s = 1; $s <= $size; $s++) {
+            $fieldsAllocate = "[\n'id' => {$s},";
+            $fieldsAllocate .= ltrim(rtrim((new HandleHelpers())->iterateFields($fields)));
+            $fieldsAllocate = (new HandleHelpers())->indent($fieldsAllocate);
+            $fieldsAllocate .= "\n]";
+            $rows[] = $fieldsAllocate;
         }
-        return print_r($fieldsAllocate, true);
+
+        return $rows;
+    }
+
+    /**
+     * @param string $className
+     * @param array $fieldsRows
+     * @param int $sizeCollection
+     * @return string
+     */
+    private function handleCollection(string $className, array $fieldsRows, int $sizeCollection): string
+    {
+        $collection = '';
+        for ($c = 0; $c < $sizeCollection; $c++) {
+            if ($c > 0) {
+                $collection .= "\n";
+            }
+            $collection .= 'new ' . $className . '(' . rtrim(ltrim($fieldsRows[$c])) . '),';
+        }
+        return (new HandleHelpers())->indent($collection, 16);
     }
 }

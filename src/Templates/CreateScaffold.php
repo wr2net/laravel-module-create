@@ -14,6 +14,11 @@ use Src\LaravelModuleCreate\Helpers\HandleHelpers;
 class CreateScaffold extends BaseNames
 {
     /**
+     * @var string
+     */
+    public string $controllerName;
+
+    /**
      * @var HandleHelpers
      */
     private HandleHelpers $handleHelper;
@@ -62,7 +67,9 @@ class CreateScaffold extends BaseNames
             $this->handleCreateRequest($path, $projectName, $moduleName);
             $this->handleCreateService($path, $projectName, $moduleName);
 
-            (new Complements($this->handleHelper))->handleComplements($projectName, $moduleName);
+            (new Complements($this->handleHelper))->handleComplements(
+                $projectName, $moduleName, $this->controllerName
+            );
         }
 
         if (!file_exists(parent::BASE_FOLDER . '/' . $projectName)) {
@@ -129,7 +136,7 @@ class CreateScaffold extends BaseNames
             $this->handleHelper->handleName($moduleName)
         );
         $fileName = "{$className}Controller.php";
-
+        $this->controllerName = "{$className}Controller";
         $this->createFolder($path, $folderName, $subFolderName);
         file_put_contents(
             $path . '/' . $folderName . '/' . $subFolderName . '/' . $fileName,
