@@ -22,5 +22,5 @@ class BaseNames
     const UNIT_FOLDER = self::TEST_FOLDER . "Unit/";
     const FEATURE_FOLDER = self::TEST_FOLDER . "Feature/";
     const MIGRATION_FOLDER = "database/migrations/";
-    const VERSION = "1.2.01";
+    const VERSION = "1.2.03";
 }
